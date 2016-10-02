@@ -39,25 +39,23 @@ bool checkCollisions(Device::Ptr device, const State &state, const CollisionDete
 }
 
 int main(int argc, char** argv) {
-	const string wcFile = "~/workspace/robotics/Kr16WallWorkCell/Scene.wc.xml";
+	const string wcFile = "../../Kr16WallWorkCell/Scene.wc.xml";
 	const string deviceName = "KukaKr16";
 	cout << "Trying to use workcell " << wcFile << " and device " << deviceName << endl;
 
-	std::cout << "test 0" << std::endl;
-
 	WorkCell::Ptr wc = WorkCellLoader::Factory::load(wcFile);
-
-	std::cout << "test 0.5" << std::endl;
+	if ( wc == NULL  ) {
+		cerr << "Workcell: " << wcFile << " not found! " << endl;	
+		return 0;	
+	}
 
 	Device::Ptr device = wc->findDevice(deviceName);
-
-	std::cout << "test 1" << std::endl;
 	if (device == NULL) {
 		cerr << "Device: " << deviceName << " not found!" << endl;
 		return 0;
 	}
+
 	const State state = wc->getDefaultState();
-	std::cout << "test 2" << std::endl;
 
 	CollisionDetector detector(wc, ProximityStrategyFactory::makeDefaultCollisionStrategy());
 	PlannerConstraint constraint = PlannerConstraint::make(&detector,device,state);
@@ -74,9 +72,8 @@ int main(int argc, char** argv) {
 	double extend = 0.1;
 	QToQPlanner::Ptr planner = RRTPlanner::makeQToQPlanner(constraint, sampler, metric, extend, RRTPlanner::RRTConnect);
 
-	Q from(6,-0.2,-0.6,1.5,0.0,0.6,1.2);
-	//Q to(6,1.7,0.6,-0.8,0.3,0.7,-0.5); // Very difficult for planner
-	Q to(6,1.4,-1.3,1.5,0.3,1.3,1.6);
+	Q from(6, -3.142, -0.827, -3.002, -3.143, 0.099, -1.573);
+	Q to(6, 1.571, 0.006, 0.030, 0.153, 0.762, 4.490 );
 
 	if (!checkCollisions(device, state, detector, from))
 		return 0;
