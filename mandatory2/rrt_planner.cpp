@@ -1,8 +1,8 @@
 #include <iostream>
-#include "/home/theis/workspace/RobWork/RobWork/src/rw/rw.hpp"
-#include "/home/theis/workspace/RobWork/RobWork/src/rwlibs/pathplanners/rrt/RRTPlanner.hpp"
-#include "/home/theis/workspace/RobWork/RobWork/src/rwlibs/pathplanners/rrt/RRTQToQPlanner.hpp"
-#include "/home/theis/workspace/RobWork/RobWork/src/rwlibs/proximitystrategies/ProximityStrategyFactory.hpp"
+#include "rw/rw.hpp"
+#include "rwlibs/pathplanners/rrt/RRTPlanner.hpp"
+#include "rwlibs/pathplanners/rrt/RRTQToQPlanner.hpp"
+#include "rwlibs/proximitystrategies/ProximityStrategyFactory.hpp"
 
 using namespace std;
 using namespace rw::common;
