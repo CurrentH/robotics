@@ -28,7 +28,7 @@ INCLUDE_DIRECTORIES( ${ROBWORK_INCLUDE_DIRS} )
 LINK_DIRECTORIES( ${ROBWORK_LIBRARY_DIRS} )
 
 # Add the source files to build
-SET(SrcFiles src/rrt_planner.cpp)
+SET(SrcFiles ../src/rrt_planner.cpp)
 
 # The shared library to build:
 ADD_EXECUTABLE(mandatory2 ${SrcFiles})

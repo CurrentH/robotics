@@ -39,17 +39,25 @@ bool checkCollisions(Device::Ptr device, const State &state, const CollisionDete
 }
 
 int main(int argc, char** argv) {
-	const string wcFile = "~/workspace/robotics/Kr16WorkCell/Scene.wc.xml";
+	const string wcFile = "~/workspace/robotics/Kr16WallWorkCell/Scene.wc.xml";
 	const string deviceName = "KukaKr16";
 	cout << "Trying to use workcell " << wcFile << " and device " << deviceName << endl;
 
+	std::cout << "test 0" << std::endl;
+
 	WorkCell::Ptr wc = WorkCellLoader::Factory::load(wcFile);
+
+	std::cout << "test 0.5" << std::endl;
+
 	Device::Ptr device = wc->findDevice(deviceName);
+
+	std::cout << "test 1" << std::endl;
 	if (device == NULL) {
 		cerr << "Device: " << deviceName << " not found!" << endl;
 		return 0;
 	}
 	const State state = wc->getDefaultState();
+	std::cout << "test 2" << std::endl;
 
 	CollisionDetector detector(wc, ProximityStrategyFactory::makeDefaultCollisionStrategy());
 	PlannerConstraint constraint = PlannerConstraint::make(&detector,device,state);
