@@ -2,7 +2,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 
 # The name of the project
-PROJECT(HelloWorldRobWork)
+PROJECT(Mandatory)
 MESSAGE(${PROJECT_NAME} ":")
 
 # Used to resolve absolute path names
@@ -28,10 +28,10 @@ INCLUDE_DIRECTORIES( ${ROBWORK_INCLUDE_DIRS} )
 LINK_DIRECTORIES( ${ROBWORK_LIBRARY_DIRS} )
 
 # Add the source files to build
-SET(SrcFiles src/HelloWorldRobWork.cpp)
+SET(SrcFiles src/rrt_planner.cpp)
 
 # The shared library to build:
-ADD_EXECUTABLE(HelloWorldRobWork ${SrcFiles})
-TARGET_LINK_LIBRARIES(HelloWorldRobWork ${ROBWORK_LIBRARIES})
+ADD_EXECUTABLE(mandatory2 ${SrcFiles})
+TARGET_LINK_LIBRARIES(mandatory2 ${ROBWORK_LIBRARIES})
 
 MESSAGE(${PROJECT_NAME} " done!")
