@@ -16,14 +16,28 @@
      <Name>location-2</Name>
      <Description>Default plugin location for RobWork</Description>
      <Value>
-      <String>/home/theis/workspace/RobWork/RobWork//libs/release/</String>
+      <String>/home/stagsted/RobWork/RobWork//libs/release/</String>
      </Value>
     </Property>
     <Property>
      <Name>location-3</Name>
      <Description>Default plugin location for RobWorkStudio</Description>
      <Value>
-      <String>/home/theis/workspace/RobWork/RobWorkStudio//libs/release/</String>
+      <String>/home/stagsted/RobWork/RobWorkStudio//libs/release/</String>
+     </Value>
+    </Property>
+    <Property>
+     <Name>location-4</Name>
+     <Description>Default plugin location for RobWorkSim</Description>
+     <Value>
+      <String>/home/stagsted/RobWork/RobWorkSimulator//libs/release/</String>
+     </Value>
+    </Property>
+    <Property>
+     <Name>location-5</Name>
+     <Description>Default plugin location for RobWorkHardware</Description>
+     <Value>
+      <String>/home/stagsted/RobWork/RobWorkHardware//libs/release/</String>
      </Value>
     </Property>
    </PropertyMap>

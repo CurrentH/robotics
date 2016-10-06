@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/mandatory2.dir/home/theis/workspace/robotics/mandatory2/src/rrt_planner.cpp.o"
+  "CMakeFiles/mandatory2.dir/home/stagsted/workspace/robotics/mandatory2/src/rrt_planner.cpp.o"
   "mandatory2.pdb"
   "mandatory2"
 )

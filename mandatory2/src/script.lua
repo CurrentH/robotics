@@ -18,9 +18,4 @@ function attach(obj, tool)
 	rw.sleep(0.1)
 end
 
-
-setQ({-3.142, -0.827, -3.002, -3.143, 0.099, -1.573})
-attach(bottle,gripper)
-
-attach(bottle,table)
-setQ({1.571, 0.006, 0.03, 0.153, 0.762, 4.49})
+dofile("/home/stagsted/workspace/robotics/mandatory2/src/path.lua")
