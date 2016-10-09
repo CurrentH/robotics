@@ -139,7 +139,7 @@ int main(int argc, char** argv) {
 	Q from(6, -3.142, -0.827, -3.002, -3.143, 0.099, -1.573);
 	Q to(6, 1.571, 0.006, 0.030, 0.153, 0.762, 4.490 );
 
-	double extend = 0.50;
+	double extend = 0.01;
 
 	device->setQ(start, state);
 	generateLua(start, from, device, wc, extend, state, luaFile);
@@ -156,18 +156,23 @@ int main(int argc, char** argv) {
 	generateLua(start, to, device, wc, extend, state, luaFile);
 
 	luaFile.close();
+	ofstream statFile;
+	statFile.open("stat_file.csv");
 
-	//	Extend har kørt fra 0.1 til og med 0.49
-
+// The above only handle the visual run for the robot, whereas below the statistical analysis
+// of the planner is done.
+	device->setQ(from,state);
+	Kinematics::gripFrame(bottle, gripper, state);
 	while(extend<2*Pi){
 		std::cout << "Start iteration with extend: " << extend << std::endl;
 		for (int i = 0; i < 100; i++){
 			struct Data temp = runIteration(from, to, device, wc, extend, state, gripper);
-			std::cout << temp.cartesianLength << "," << temp.time << "," << temp.step << "," << temp.epsilon << std::endl;
+			statFile << temp.cartesianLength << "," << temp.time << "," << temp.step << "," << temp.epsilon << std::endl;
+			std::cout << "\t iteration: " << i << " done." << std::endl;
 		}
-		extend += 0.01;
+		extend += 0.01;	
 	}
 
-
+	statFile.close();
 	return 0;
 }
