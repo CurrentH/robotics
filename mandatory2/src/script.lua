@@ -18,4 +18,4 @@ function attach(obj, tool)
 	rw.sleep(0.1)
 end
 
-dofile("/home/stagsted/workspace/robotics/mandatory2/src/path.lua")
+dofile("/home/theis/workspace/robotics/mandatory2/src/path.lua")

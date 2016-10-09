@@ -67,7 +67,7 @@ void generateLua(Q &from, Q &to, Device::Ptr &device, WorkCell::Ptr &wc, double 
 	planner->query(from,to,path,MAXTIME);
 	for (QPath::iterator it = path.begin(); it < path.end(); it++) {
 		luaFile << "setQ({";
-		for (int j = 0; j < it->size() - 1; j++){
+		for (unsigned int j = 0; j < it->size() - 1; j++){
 			luaFile << it->m()[j] << ",";
 		}
 		luaFile << it->m()[it->size() - 1] << "})" << std::endl;
@@ -139,7 +139,7 @@ int main(int argc, char** argv) {
 	Q from(6, -3.142, -0.827, -3.002, -3.143, 0.099, -1.573);
 	Q to(6, 1.571, 0.006, 0.030, 0.153, 0.762, 4.490 );
 
-	double extend = 0.1;
+	double extend = 0.50;
 
 	device->setQ(start, state);
 	generateLua(start, from, device, wc, extend, state, luaFile);
@@ -155,17 +155,19 @@ int main(int argc, char** argv) {
 	luaFile << "attach(bottle, table)" << std::endl;
 	generateLua(start, to, device, wc, extend, state, luaFile);
 
-	/*
-	for (int i = 0; i < 10; i++){
-		extend/=2;
-		for (int j = 0; j < 10; j++){
+	luaFile.close();
+
+	//	Extend har kørt fra 0.1 til og med 0.49
+
+	while(extend<2*Pi){
+		std::cout << "Start iteration with extend: " << extend << std::endl;
+		for (int i = 0; i < 100; i++){
 			struct Data temp = runIteration(from, to, device, wc, extend, state, gripper);
 			std::cout << temp.cartesianLength << "," << temp.time << "," << temp.step << "," << temp.epsilon << std::endl;
-
 		}
+		extend += 0.01;
 	}
-	*/
-	luaFile.close();
+
 
 	return 0;
 }

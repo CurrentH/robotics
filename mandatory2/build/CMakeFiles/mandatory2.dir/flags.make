@@ -6,5 +6,5 @@ CXX_FLAGS = -std=c++11  -O3 -DNDEBUG   -Wall -Wno-strict-aliasing -Wno-unused-fu
 
 CXX_DEFINES = -DBOOST_DISABLE_ASSERTS
 
-CXX_INCLUDES = -I/home/stagsted/RobWork/RobWork/cmake/../ext/boostbindings -I/home/stagsted/RobWork/RobWork/cmake/../ext/eigen3 -I/home/stagsted/RobWork/RobWork/cmake/../src -I/home/stagsted/RobWork/RobWork/cmake/../ext/rwyaobi -I/home/stagsted/RobWork/RobWork/cmake/../ext/rwpqp -I/home/stagsted/RobWork/RobWork/cmake/../ext/lua/src -I/home/stagsted/RobWork/RobWork/cmake/../ext/qhull/src -I/home/stagsted/RobWork/RobWork/cmake/../ext/csgjs/src -I/home/stagsted/RobWork/RobWork/cmake/../ext/zlib -I/home/stagsted/RobWork/RobWork/cmake/../ext/unzip -I/home/stagsted/RobWork/RobWork/cmake/../ext/assimp/include 
+CXX_INCLUDES = -I/home/theis/workspace/RobWork/RobWork/cmake/../ext/boostbindings -I/home/theis/workspace/RobWork/RobWork/cmake/../ext/eigen3 -I/home/theis/workspace/RobWork/RobWork/cmake/../src -I/home/theis/workspace/RobWork/RobWork/cmake/../ext/rwyaobi -I/home/theis/workspace/RobWork/RobWork/cmake/../ext/rwpqp -I/home/theis/workspace/RobWork/RobWork/cmake/../ext/lua/src -I/home/theis/workspace/RobWork/RobWork/cmake/../ext/qhull/src -I/home/theis/workspace/RobWork/RobWork/cmake/../ext/csgjs/src -I/home/theis/workspace/RobWork/RobWork/cmake/../ext/unzip -I/home/theis/workspace/RobWork/RobWork/cmake/../ext/assimp/include 
 
