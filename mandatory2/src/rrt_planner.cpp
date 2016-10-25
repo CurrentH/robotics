@@ -139,7 +139,7 @@ int main(int argc, char** argv) {
 	Q from(6, -3.142, -0.827, -3.002, -3.143, 0.099, -1.573);
 	Q to(6, 1.571, 0.006, 0.030, 0.153, 0.762, 4.490 );
 
-	double extend = 0.01;
+	double extend = 0.2;
 
 	device->setQ(start, state);
 	generateLua(start, from, device, wc, extend, state, luaFile);

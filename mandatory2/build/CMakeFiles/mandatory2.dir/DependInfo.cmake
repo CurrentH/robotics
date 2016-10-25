@@ -15,16 +15,17 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/theis/workspace/RobWork/RobWork/cmake/../ext/boostbindings"
-  "/home/theis/workspace/RobWork/RobWork/cmake/../ext/eigen3"
-  "/home/theis/workspace/RobWork/RobWork/cmake/../src"
-  "/home/theis/workspace/RobWork/RobWork/cmake/../ext/rwyaobi"
-  "/home/theis/workspace/RobWork/RobWork/cmake/../ext/rwpqp"
-  "/home/theis/workspace/RobWork/RobWork/cmake/../ext/lua/src"
-  "/home/theis/workspace/RobWork/RobWork/cmake/../ext/qhull/src"
-  "/home/theis/workspace/RobWork/RobWork/cmake/../ext/csgjs/src"
-  "/home/theis/workspace/RobWork/RobWork/cmake/../ext/unzip"
-  "/home/theis/workspace/RobWork/RobWork/cmake/../ext/assimp/include"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/boostbindings"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/eigen3"
+  "/home/theis/workspace/robwork/RobWork/cmake/../src"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/rwyaobi"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/rwpqp"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/lua/src"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/qhull/src"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/csgjs/src"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/zlib"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/unzip"
+  "/home/theis/workspace/robwork/RobWork/cmake/../ext/assimp/include"
   )
 
 # Targets to which this target links.
