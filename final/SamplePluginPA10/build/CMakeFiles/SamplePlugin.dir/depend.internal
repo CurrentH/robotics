@@ -8,6 +8,8 @@ CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o
  /usr/include/qt4/QtCore/qglobal.h
 CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o
  /home/theis/workspace/robotics/final/SamplePluginPA10/build/ui_SamplePlugin.h
+ /home/theis/workspace/robotics/final/SamplePluginPA10/src/IK.hpp
+ /home/theis/workspace/robotics/final/SamplePluginPA10/src/Marker.hpp
  /home/theis/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.cpp
  /home/theis/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../ext/boostbindings/boost/numeric/bindings/lapack/geev.hpp
@@ -424,8 +426,14 @@ CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/DistanceCalculator.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/DistanceMultiStrategy.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/DistanceStrategy.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/ProximityCache.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/ProximityFilter.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/ProximityFilterStrategy.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/ProximityModel.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/ProximitySetup.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/ProximitySetupRule.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/ProximityStrategy.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./proximity/ProximityStrategyData.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./sensor/Camera.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./sensor/CameraFirewire.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./sensor/CameraListener.hpp
@@ -467,15 +475,11 @@ CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Cache.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/ConcatVectorIterator.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Event.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Exception.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Extension.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/ExtensionPoint.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/ExtensionRegistry.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/IOUtil.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/InputArchive.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Log.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/LogWriter.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Message.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/OutputArchive.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/PairMap.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Property.hpp
@@ -584,7 +588,6 @@ CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/ControllerModel.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/Device.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/JacobianCalculator.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/Joint.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/Object.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/WorkCell.hpp
@@ -592,14 +595,6 @@ CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/CollisionDetector.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/CollisionSetup.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/CollisionStrategy.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/DistanceMultiStrategy.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/ProximityCache.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/ProximityFilter.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/ProximityFilterStrategy.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/ProximitySetup.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/ProximitySetupRule.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity/ProximityStrategyData.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/rw.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/sensor.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/sensor/Contact2D.hpp
@@ -785,6 +780,8 @@ CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o
 CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /home/theis/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx
  /home/theis/workspace/robotics/final/SamplePluginPA10/build/ui_SamplePlugin.h
+ /home/theis/workspace/robotics/final/SamplePluginPA10/src/IK.hpp
+ /home/theis/workspace/robotics/final/SamplePluginPA10/src/Marker.hpp
  /home/theis/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../ext/boostbindings/boost/numeric/bindings/lapack/geev.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../ext/boostbindings/boost/numeric/bindings/lapack/gesvd.hpp
@@ -1156,7 +1153,6 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./math/VelocityScrew6D.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./math/Wrench6D.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./models/CompositeDevice.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./models/ControllerModel.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./models/DHParameterSet.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./models/DeformableObject.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/./models/DependentJoint.hpp
@@ -1250,13 +1246,11 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Cache.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/ConcatVectorIterator.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Event.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Extension.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/ExtensionPoint.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/ExtensionRegistry.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/InputArchive.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Log.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/LogWriter.hpp
- /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Message.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/OutputArchive.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/PairMap.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/common/Property.hpp
@@ -1332,6 +1326,8 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/kinematics/TreeState.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/loaders.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/loaders/GeometryFactory.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/loaders/ImageLoader.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/loaders/WorkCellFactory.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/loaders/WorkCellLoader.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/loaders/model3d/STLFile.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/math.hpp
@@ -1361,8 +1357,10 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/math/VelocityScrew6D.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/math_fwd.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/ControllerModel.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/Device.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/Joint.hpp
+ /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/Object.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/models/WorkCell.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/pathplanning.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rw/proximity.hpp
@@ -1384,6 +1382,8 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /home/theis/workspace/robwork/RobWork/cmake/../src/rwlibs/simulation/FrameGrabber.hpp
  /home/theis/workspace/robwork/RobWork/cmake/../src/rwlibs/simulation/GLFrameGrabber.hpp
  /home/theis/workspace/robwork/RobWorkStudio/cmake/../src/RobWorkStudioConfig.hpp
+ /home/theis/workspace/robwork/RobWorkStudio/cmake/../src/rws/RWStudioView3D.hpp
+ /home/theis/workspace/robwork/RobWorkStudio/cmake/../src/rws/RobWorkStudio.hpp
  /home/theis/workspace/robwork/RobWorkStudio/cmake/../src/rws/RobWorkStudioPlugin.hpp
  /usr/include/qt4/Qt3Support/q3cstring.h
  /usr/include/qt4/Qt3Support/q3valuelist.h
@@ -1424,6 +1424,7 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /usr/include/qt4/QtCore/qatomic_windowsce.h
  /usr/include/qt4/QtCore/qatomic_x86_64.h
  /usr/include/qt4/QtCore/qbasicatomic.h
+ /usr/include/qt4/QtCore/qbasictimer.h
  /usr/include/qt4/QtCore/qbuffer.h
  /usr/include/qt4/QtCore/qbytearray.h
  /usr/include/qt4/QtCore/qchar.h
@@ -1475,6 +1476,7 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /usr/include/qt4/QtGui/QDockWidget
  /usr/include/qt4/QtGui/QHeaderView
  /usr/include/qt4/QtGui/QLabel
+ /usr/include/qt4/QtGui/QMainWindow
  /usr/include/qt4/QtGui/QPlatformWindow
  /usr/include/qt4/QtGui/QPushButton
  /usr/include/qt4/QtGui/QSlider
@@ -1515,6 +1517,7 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /usr/include/qt4/QtGui/qlayout.h
  /usr/include/qt4/QtGui/qlayoutitem.h
  /usr/include/qt4/QtGui/qmacdefines_mac.h
+ /usr/include/qt4/QtGui/qmainwindow.h
  /usr/include/qt4/QtGui/qmatrix.h
  /usr/include/qt4/QtGui/qmime.h
  /usr/include/qt4/QtGui/qpaintdevice.h
@@ -1542,3 +1545,6 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
  /usr/include/qt4/QtGui/qwindowdefs.h
  /usr/include/qt4/QtGui/qwindowdefs_win.h
  /usr/include/qt4/QtGui/qwmatrix.h
+ /usr/share/qt4/include/Qt/qplugin.h
+ /usr/share/qt4/include/Qt/qpushbutton.h
+ /usr/share/qt4/include/Qt/qtimer.h
