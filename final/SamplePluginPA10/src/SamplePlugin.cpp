@@ -38,7 +38,6 @@ SamplePlugin::SamplePlugin():
 	// now connect stuff from the ui component
 	connect(_btn0    ,SIGNAL(pressed()), this, SLOT(btnPressed()) );
 	connect(_btn1    ,SIGNAL(pressed()), this, SLOT(btnPressed()) );
-	connect(_spinBox  ,SIGNAL(valueChanged(int)), this, SLOT(btnPressed()) );
 
 	Image textureImage(300,300,Image::GRAY,Image::Depth8U);
 	_textureRender = new RenderImage(textureImage);
@@ -54,7 +53,14 @@ SamplePlugin::~SamplePlugin()
 }
 
 void SamplePlugin::initialize() {
-	log().info() << "INITALIZE" << "\n";
+	log().info() << "INITALIZE\n";
+
+	/**
+	 * 	Initialize Marker test stuff
+	 * 	Initialize Inverse kinematic-stuff
+	 * 	Initialize Computer vision stuff
+	 **/
+
 
 	getRobWorkStudio()->stateChangedEvent().add(boost::bind(&SamplePlugin::stateChangedListener, this, _1), this);
 
@@ -66,12 +72,17 @@ void SamplePlugin::initialize() {
 	Mat im, image;
 	im = imread("/home/theis/workspace/robotics/final/SamplePluginPA10/src/lena.bmp", CV_LOAD_IMAGE_COLOR); // Read the file
 	cvtColor(im, image, CV_BGR2RGB); // Switch the red and blue color channels
-	if(! image.data ) {
+	if(!image.data ) {
 		//TODO:
 		//RW_THROW("Could not open or find the image: please modify the file path in the source code!");
 	}
-	QImage img(image.data, image.cols, image.rows, image.step, QImage::Format_RGB888); // Create QImage from the OpenCV image
-	_label->setPixmap(QPixmap::fromImage(img)); // Show the image at the label in the plugin
+
+	QImage img(image.data, image.cols, image.rows, image.step, QImage::Format_RGB888);
+	QPixmap p = QPixmap::fromImage(img);
+	unsigned int maxW = 400/2;
+	unsigned int maxH = 800/2;
+	_cameraView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
+	_cvView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
 }
 
 void SamplePlugin::open(WorkCell* workcell)
@@ -88,6 +99,7 @@ void SamplePlugin::open(WorkCell* workcell)
 		if (textureFrame != NULL) {
 			getRobWorkStudio()->getWorkCellScene()->addRender("TextureImage",_textureRender,textureFrame);
 		}
+
 		// Add the background render to this workcell if there is a frame for texture
 		Frame* bgFrame = _wc->findFrame("Background");
 		if (bgFrame != NULL) {
@@ -97,7 +109,7 @@ void SamplePlugin::open(WorkCell* workcell)
 		// Create a GLFrameGrabber if there is a camera frame with a Camera property set
 		Frame* cameraFrame = _wc->findFrame("CameraSim");
 		if (cameraFrame != NULL) {
-			if (cameraFrame->getPropertyMap().has("Camera")) {
+			if(cameraFrame->getPropertyMap().has("Camera")) {
 				// Read the dimensions and field of view
 				double fovy;
 				int width,height;
@@ -116,30 +128,34 @@ void SamplePlugin::open(WorkCell* workcell)
 }
 
 void SamplePlugin::close() {
-	log().info() << "CLOSE" << "\n";
+	log().info() << "CLOSE\n";
 
 	// Stop the timer
 	_timer->stop();
+
 	// Remove the texture render
 	Frame* textureFrame = _wc->findFrame("MarkerTexture");
 	if (textureFrame != NULL) {
 		getRobWorkStudio()->getWorkCellScene()->removeDrawable("TextureImage",textureFrame);
 	}
+
 	// Remove the background render
 	Frame* bgFrame = _wc->findFrame("Background");
 	if (bgFrame != NULL) {
 		getRobWorkStudio()->getWorkCellScene()->removeDrawable("BackgroundImage",bgFrame);
 	}
+
 	// Delete the old framegrabber
 	if (_framegrabber != NULL) {
 		delete _framegrabber;
 	}
+
 	_framegrabber = NULL;
 	_wc = NULL;
 }
 
 Mat SamplePlugin::toOpenCVImage(const Image& img) {
-	Mat res(img.getHeight(),img.getWidth(), CV_8SC3);
+	Mat res(img.getHeight(), img.getWidth(), CV_8SC3);
 	res.data = (uchar*)img.getImageData();
 	return res;
 }
@@ -162,13 +178,17 @@ void SamplePlugin::btnPressed() {
 		    _timer->start(100); // run 10 Hz
 		else
 			_timer->stop();
-	} else if(obj==_spinBox){
-		log().info() << "spin value:" << _spinBox->value() << "\n";
 	}
 }
 
 void SamplePlugin::timer() {
-	if (_framegrabber != NULL) {
+	if(_framegrabber != NULL ){
+		/*
+			marker->step();
+			computerVision->step();
+			inverseController->step();
+		*/
+
 		// Get the image as a RW image
 		Frame* cameraFrame = _wc->findFrame("CameraSim");
 		_framegrabber->grab(cameraFrame, _state);
@@ -182,9 +202,10 @@ void SamplePlugin::timer() {
 		// Show in QLabel
 		QImage img(imflip.data, imflip.cols, imflip.rows, imflip.step, QImage::Format_RGB888);
 		QPixmap p = QPixmap::fromImage(img);
-		unsigned int maxW = 400;
-		unsigned int maxH = 800;
-		_label->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
+		unsigned int maxW = 400/2;
+		unsigned int maxH = 800/2;
+		_cameraView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
+		_cvView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
 	}
 }
 
@@ -193,7 +214,6 @@ void SamplePlugin::stateChangedListener(const State& state) {
 }
 
 Q_EXPORT_PLUGIN(SamplePlugin);
-
 
 
 

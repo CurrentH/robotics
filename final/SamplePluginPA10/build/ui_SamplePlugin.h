@@ -32,62 +32,80 @@ public:
     QWidget *dockWidgetContents;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
+
     QPushButton *_btn0;
     QPushButton *_btn1;
+
     QCheckBox *_checkBox;
-    QSpinBox *_spinBox;
-    QSlider *_slider;
-    QLabel *_label;
-    QCalendarWidget *_calendar;
+
+    QSlider *_slider_0;
+    QSlider *_slider_1;
+    QSlider *_slider_2;
+
+    QLabel *_cameraView;
+    QLabel *_cvView;
 
     void setupUi(QDockWidget *SamplePlugin)
     {
-        if (SamplePlugin->objectName().isEmpty())
-            SamplePlugin->setObjectName(QString::fromUtf8("SamplePlugin"));
-        SamplePlugin->resize(428, 479);
+        if( SamplePlugin->objectName().isEmpty() ){
+        	SamplePlugin->setObjectName(QString::fromUtf8("SamplePlugin"));
+        }
+        SamplePlugin->resize(400, 600);
+
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
+
         verticalLayout_2 = new QVBoxLayout(dockWidgetContents);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+
+        //	Buttons
+        QGridLayout * gridForButtons = new QGridLayout(dockWidgetContents);
+
         _btn0 = new QPushButton(dockWidgetContents);
         _btn0->setObjectName(QString::fromUtf8("_btn0"));
-
-        verticalLayout->addWidget(_btn0);
+        gridForButtons->addWidget(_btn0,0,0,1,1,Qt::AlignVCenter | Qt::AlignLeft);
 
         _btn1 = new QPushButton(dockWidgetContents);
         _btn1->setObjectName(QString::fromUtf8("_btn1"));
+        gridForButtons->addWidget(_btn1,0,1,1,1,Qt::AlignVCenter | Qt::AlignRight);
 
-        verticalLayout->addWidget(_btn1);
+        verticalLayout->addLayout(gridForButtons);
 
+        //	Checkboxes
         _checkBox = new QCheckBox(dockWidgetContents);
         _checkBox->setObjectName(QString::fromUtf8("_checkBox"));
-
         verticalLayout->addWidget(_checkBox);
 
-        _spinBox = new QSpinBox(dockWidgetContents);
-        _spinBox->setObjectName(QString::fromUtf8("_spinBox"));
+        //	Sliders
+        _slider_0 = new QSlider(dockWidgetContents);
+        _slider_0->setObjectName(QString::fromUtf8("_slider_0"));
+        _slider_0->setOrientation(Qt::Horizontal);
+        verticalLayout->addWidget(_slider_0);
 
-        verticalLayout->addWidget(_spinBox);
+		_slider_1 = new QSlider(dockWidgetContents);
+		_slider_1->setObjectName(QString::fromUtf8("_slider_1"));
+		_slider_1->setOrientation(Qt::Horizontal);
+		verticalLayout->addWidget(_slider_1);
 
-        _slider = new QSlider(dockWidgetContents);
-        _slider->setObjectName(QString::fromUtf8("_slider"));
-        _slider->setOrientation(Qt::Horizontal);
+		_slider_2 = new QSlider(dockWidgetContents);
+		_slider_2->setObjectName(QString::fromUtf8("_slider_2"));
+		_slider_2->setOrientation(Qt::Horizontal);
+		verticalLayout->addWidget(_slider_2);
 
-        verticalLayout->addWidget(_slider);
+		//	Camera views
+		QGridLayout * gridForViews = new QGridLayout(dockWidgetContents);
 
-        _label = new QLabel(dockWidgetContents);
-        _label->setObjectName(QString::fromUtf8("_label"));
+        _cameraView = new QLabel(dockWidgetContents);
+        _cameraView->setObjectName(QString::fromUtf8("_label"));
+        gridForViews->addWidget(_cameraView,0,0,1,1,Qt::AlignVCenter | Qt::AlignLeft);
 
-        verticalLayout->addWidget(_label);
+        _cvView = new QLabel(dockWidgetContents);
+		_cvView->setObjectName(QString::fromUtf8("_label"));
+		gridForViews->addWidget(_cvView,0,1,1,1,Qt::AlignVCenter | Qt::AlignRight);
 
-        _calendar = new QCalendarWidget(dockWidgetContents);
-        _calendar->setObjectName(QString::fromUtf8("_calendar"));
-
-        verticalLayout->addWidget(_calendar);
-
-
+        verticalLayout->addLayout(gridForViews);
         verticalLayout_2->addLayout(verticalLayout);
 
         SamplePlugin->setWidget(dockWidgetContents);
@@ -100,10 +118,11 @@ public:
     void retranslateUi(QDockWidget *SamplePlugin)
     {
         SamplePlugin->setWindowTitle(QApplication::translate("SamplePlugin", "DockWidget", 0, QApplication::UnicodeUTF8));
-        _btn0->setText(QApplication::translate("SamplePlugin", "PushButton0", 0, QApplication::UnicodeUTF8));
-        _btn1->setText(QApplication::translate("SamplePlugin", "PushButton1", 0, QApplication::UnicodeUTF8));
+        _btn0->setText(QApplication::translate("SamplePlugin", "Button 0", 0, QApplication::UnicodeUTF8));
+        _btn1->setText(QApplication::translate("SamplePlugin", "Button 1", 0, QApplication::UnicodeUTF8));
         _checkBox->setText(QApplication::translate("SamplePlugin", "CheckBox", 0, QApplication::UnicodeUTF8));
-        _label->setText(QApplication::translate("SamplePlugin", "Label", 0, QApplication::UnicodeUTF8));
+        _cameraView->setText(QApplication::translate("SamplePlugin", "Camera view", 0, QApplication::UnicodeUTF8));
+        _cameraView->setText(QApplication::translate("SamplePlugin", "Computer view", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

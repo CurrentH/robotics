@@ -8,7 +8,6 @@
 #include <rws/RobWorkStudioPlugin.hpp>
 
 #include <rw/rw.hpp>
-
 #include <rw/kinematics/State.hpp>
 #include <rwlibs/opengl/RenderImage.hpp>
 #include <rwlibs/simulation/GLFrameGrabber.hpp>
@@ -21,7 +20,7 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::SamplePlugin
 	public:
 		SamplePlugin();
 		virtual ~SamplePlugin();
-		virtual void open(rw::models::WorkCell* workcell);
+		virtual void open( rw::models::WorkCell* workcell );
 		virtual void close();
 		virtual void initialize();
 
