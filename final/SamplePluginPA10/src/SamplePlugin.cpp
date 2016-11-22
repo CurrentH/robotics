@@ -1,9 +1,17 @@
 #include "SamplePlugin.hpp"
 
+#include <iostream>
+#include <string>
+#include <sstream>
+
+//TODO:
+//#include <QPushButton>
+//#include <QTimer>
+#include "/usr/share/qt4/include/Qt/qtimer.h"
+#include "/usr/share/qt4/include/Qt/qpushbutton.h"
+#include "/usr/share/qt4/include/Qt/qplugin.h"
+
 #include <rws/RobWorkStudio.hpp>
-
-#include <QPushButton>
-
 #include <rw/loaders/ImageLoader.hpp>
 #include <rw/loaders/WorkCellFactory.hpp>
 
@@ -17,7 +25,6 @@ using namespace rwlibs::opengl;
 using namespace rwlibs::simulation;
 
 using namespace rws;
-
 using namespace cv;
 
 SamplePlugin::SamplePlugin():
@@ -52,15 +59,16 @@ void SamplePlugin::initialize() {
 	getRobWorkStudio()->stateChangedEvent().add(boost::bind(&SamplePlugin::stateChangedListener, this, _1), this);
 
 	// Auto load workcell
-	WorkCell::Ptr wc = WorkCellLoader::Factory::load("/home/student/Downloads/PA10WorkCell/ScenePA10RoVi1.wc.xml");
+	WorkCell::Ptr wc = WorkCellLoader::Factory::load("/home/theis/workspace/robotics/PA10WorkCell/ScenePA10RoVi1.wc.xml");
 	getRobWorkStudio()->setWorkCell(wc);
 
 	// Load Lena image
 	Mat im, image;
-	im = imread("/home/student/Downloads/SamplePluginPA10/src/lena.bmp", CV_LOAD_IMAGE_COLOR); // Read the file
+	im = imread("/home/theis/workspace/robotics/final/SamplePluginPA10/src/lena.bmp", CV_LOAD_IMAGE_COLOR); // Read the file
 	cvtColor(im, image, CV_BGR2RGB); // Switch the red and blue color channels
 	if(! image.data ) {
-		RW_THROW("Could not open or find the image: please modify the file path in the source code!");
+		//TODO:
+		//RW_THROW("Could not open or find the image: please modify the file path in the source code!");
 	}
 	QImage img(image.data, image.cols, image.rows, image.step, QImage::Format_RGB888); // Create QImage from the OpenCV image
 	_label->setPixmap(QPixmap::fromImage(img)); // Show the image at the label in the plugin
@@ -94,7 +102,9 @@ void SamplePlugin::open(WorkCell* workcell)
 				double fovy;
 				int width,height;
 				std::string camParam = cameraFrame->getPropertyMap().get<std::string>("Camera");
-				std::istringstream iss (camParam, std::istringstream::in);
+				//TODO:
+				//std::istringstream iss (camParam, std::istringstream::in);
+				std::istringstream iss (camParam);
 				iss >> fovy >> width >> height;
 				// Create a frame grabber
 				_framegrabber = new GLFrameGrabber(width,height,fovy);
@@ -140,9 +150,9 @@ void SamplePlugin::btnPressed() {
 		log().info() << "Button 0\n";
 		// Set a new texture (one pixel = 1 mm)
 		Image::Ptr image;
-		image = ImageLoader::Factory::load("/home/student/Downloads/SamplePluginPA10/markers/Marker1.ppm");
+		image = ImageLoader::Factory::load("/home/theis/workspace/robotics/final/SamplePluginPA10/markers/Marker1.ppm");
 		_textureRender->setImage(*image);
-		image = ImageLoader::Factory::load("/home/student/Downloads/SamplePluginPA10/backgrounds/color1.ppm");
+		image = ImageLoader::Factory::load("/home/theis/workspace/robotics/final/SamplePluginPA10/backgrounds/color1.ppm");
 		_bgRender->setImage(*image);
 		getRobWorkStudio()->updateAndRepaint();
 	} else if(obj==_btn1){
@@ -183,3 +193,10 @@ void SamplePlugin::stateChangedListener(const State& state) {
 }
 
 Q_EXPORT_PLUGIN(SamplePlugin);
+
+
+
+
+
+
+
