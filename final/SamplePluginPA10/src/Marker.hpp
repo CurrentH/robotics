@@ -27,7 +27,7 @@ class Marker {
 	public:
 		Marker( std::string );
 		virtual ~Marker();
-		rw::kinematics::State &step();
+		Transform3D<> T1 &step();
 
 	//	Private methods
 	private:
@@ -39,9 +39,11 @@ class Marker {
 	//	Private attributes
 	private:
 		std::vector<std::vector<double> > stateList;
+		rw::math::Transform3D<> T1;
 		rw::kinematics::State state;
-		int index = 0;
 
+
+		int index = 0;
 };
 
 #endif /* MARKER_H_ */

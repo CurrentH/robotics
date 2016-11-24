@@ -30,6 +30,7 @@ using namespace rw::common;
 using namespace rw::graphics;
 using namespace rw::kinematics;
 using namespace rw::loaders;
+using namespace rw::math;
 using namespace rw::models;
 using namespace rw::sensor;
 using namespace rwlibs::opengl;
@@ -72,9 +73,10 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::SamplePlugin
 		Marker *marker = NULL;
 		IK *ik = NULL;
 
-		Device::Ptr deviceMarker = NULL;
+		MovableFrame* frameMarker = NULL;
 		Device::Ptr deviceRobot = NULL;
 
+		std::vector<std::vector<double> > data;
 };
 
 #endif /*RINGONHOOKPLUGIN_HPP_*/

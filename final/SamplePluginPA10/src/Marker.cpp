@@ -14,7 +14,7 @@ Marker::Marker( std::string filename ) {
 Marker::~Marker() {
 }
 
-rw::kinematics::State & Marker::step(){
+Transform3D<> T1 & Marker::step(){
 	/**
 	 * Update the state, and increment index.
 	 */
@@ -23,7 +23,7 @@ rw::kinematics::State & Marker::step(){
 
 
 
-	return state;
+	return transformation;
 }
 
 void Marker::loadTextFile( std::string filename ){
