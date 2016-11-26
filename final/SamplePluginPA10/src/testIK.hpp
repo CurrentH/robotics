@@ -21,11 +21,11 @@
 #ifndef IK_H_
 #define IK_H_
 
-class IK {
+class testIK {
 	//	Public methods
 	public:
-		IK();
-		virtual ~IK();
+		testIK();
+		virtual ~testIK();
 		rw::kinematics::State &step();
 
 	//	Private methods

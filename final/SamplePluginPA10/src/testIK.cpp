@@ -5,13 +5,13 @@
  *      Author: theis
  */
 
-#include "IK.hpp"
+#include "testIK.hpp"
 
-IK::IK() {
+testIK::testIK() {
 
 }
 
-IK::~IK() {
+testIK::~testIK() {
 
 }
 

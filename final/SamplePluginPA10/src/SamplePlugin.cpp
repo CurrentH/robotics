@@ -19,37 +19,36 @@ void SamplePlugin::setupVision(){
 	_framegrabber = NULL;
 }
 
-SamplePlugin::SamplePlugin(): RobWorkStudioPlugin("SamplePluginUI", QIcon(":/pa_icon.png"))
+SamplePlugin::SamplePlugin(): RobWorkStudioPlugin("PluginUI", QIcon(":/pa_icon.png"))
 {
-	//TODO:	Add button with new marker choice.
-	marker = new Marker("../motions/MarkerMotionSlow.txt");
-	//ik = new IK();
-
 	setupQT();
 	setupVision();
 }
 
-SamplePlugin::~SamplePlugin()
-{
+SamplePlugin::~SamplePlugin(){
 	delete _textureRender;
 	delete _bgRender;
 }
 
 void SamplePlugin::initialize() {
-	log().info() << "INITALIZE\n";
-	/**
-	 * 	Initialize Marker test stuff
-	 * 	Initialize Inverse kinematic-stuff
-	 * 	Initialize Computer vision stuff
-	 **/
+	log().info() << "INITALIZE - START\n";
 
 	getRobWorkStudio()->stateChangedEvent().add(boost::bind(&SamplePlugin::stateChangedListener, this, _1), this);
 	WorkCell::Ptr wc = WorkCellLoader::Factory::load("/home/theis/workspace/robotics/PA10WorkCell/ScenePA10RoVi1.wc.xml");
 	getRobWorkStudio()->setWorkCell(wc);
+
+	std::string filename = "/home/theis/workspace/robotics/final/SamplePluginPA10/motions/MarkerMotionSlow.txt";
+	temp_marker = new testMarker( filename );
+
 	frameMarker = (MovableFrame*) wc->findFrame("Marker");
-	if (frameMarker == NULL) { log().info() << "Device: Marker" << " not found!\n"; }
+	if (frameMarker == NULL){
+		log().info() << "Device: Marker" << " not found!\n";
+	}
 	deviceRobot = wc->findDevice("PA10");
-	if (deviceRobot == NULL) { log().info() << "Device: PA10" << " not found!\n"; }
+	if (deviceRobot == NULL){
+		log().info() << "Device: PA10" << " not found!\n";
+	}
+	log().info() << "INITALIZE - DONE\n";
 }
 
 void SamplePlugin::open(WorkCell* workcell)
@@ -155,38 +154,17 @@ void SamplePlugin::timer() {
 		 * 		Do a test if the output from the marker->step is the same as getQ.
 		 * 		We want to use these to update the states for the device.
 		 */
-
-		//log().info() << marker->step().size();
-		//log().info() << deviceMarker->getQ( marker->step() );
-
 		//Q temp = deviceRobot->getQ(_state);
 		//deviceRobot->setQ( temp,_state );
-
 		//Vector3D<> temp_vector = temp_marker.P();
 		//Rotation3D<> temp_rotation = temp_marker.R();
 
-		Transform3D<> temp_marker = frameMarker->getTransform(_state);
+		Transform3D<> markerPR = frameMarker->getTransform(_state);
+		frameMarker->setTransform( temp_marker->step(), _state );
+		log().info() << temp_marker->index << "\t";
+		log().info() << markerPR << "\n\n";
 
-		Vector3D<> temp_vector = Vector3D<>( 0, -8.19, 1.649 );
-		RPY<> temp_rotation = RPY<>( 0, 0, -1.571 );
-		Transform3D<> T1 = Transform3D<>( temp_vector, temp_rotation.toRotation3D() );
-
-		frameMarker->setTransform( T1, _state );
-
-		log().info() << "1: " << temp_vector << "\n";
-		log().info() << "2: " << temp_rotation << "\n";
-		log().info() << "3: " << T1 << "\n";
-		log().info() << "4: " << temp_marker << "\n\n";
-
-
-
-
-		//frameMarker->moveTo(, _state);
-		/*
-			marker->step();
-			computerVision->step();
-			inverseController->step();
-		*/
+		getRobWorkStudio()->setState(_state);
 
 		// Get the image as a RW image
 		Frame* cameraFrame = _wc->findFrame("CameraSim");

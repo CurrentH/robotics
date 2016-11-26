@@ -58,10 +58,12 @@ QT4_WRAP_CPP(MocSrcFiles src/SamplePlugin.hpp)
 QT4_ADD_RESOURCES(RccSrcFiles src/resources.qrc)
 
 # Add the source files to build (besides the Qt generated source files)
-SET(SrcFiles src/SamplePlugin.cpp)
+SET(SrcFiles src/SamplePlugin.cpp src/testMarker.cpp)
 
 # The shared library to build:
 ADD_LIBRARY(SamplePlugin MODULE ${SrcFiles} ${UIS_OUT_H} ${MocSrcFiles} ${RccSrcFiles})
 TARGET_LINK_LIBRARIES(SamplePlugin ${OpenCV_LIBS} ${ROBWORK_LIBRARIES} ${ROBWORKSTUDIO_LIBRARIES})
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
 
 MESSAGE(${PROJECT_NAME} " done!")

@@ -1,10 +1,7 @@
 #ifndef SAMPLEPLUGIN_HPP
 #define SAMPLEPLUGIN_HPP
 
-#include "../build/ui_SamplePlugin.h"
-
-#include "Marker.hpp"
-#include "IK.hpp"
+#include "../build/ui_plugin.h"
 
 #include <iostream>
 #include <string>
@@ -25,6 +22,8 @@
 #include <rws/RobWorkStudio.hpp>
 
 #include <opencv2/opencv.hpp>
+#include "/home/theis/workspace/robotics/final/SamplePluginPA10/src/testMarker.hpp"
+#include "testIK.hpp"
 
 using namespace rw::common;
 using namespace rw::graphics;
@@ -39,14 +38,14 @@ using namespace rwlibs::simulation;
 using namespace rws;
 using namespace cv;
 
-class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::SamplePlugin
+class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::Plugin
 {
 	Q_OBJECT
 	Q_INTERFACES( rws::RobWorkStudioPlugin )
 
 	public:
 		SamplePlugin();
-		virtual ~SamplePlugin();
+		virtual ~SamplePlugin( );
 		virtual void open( rw::models::WorkCell* workcell );
 		virtual void close();
 		virtual void initialize();
@@ -65,13 +64,12 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::SamplePlugin
 		QTimer* _timer;
 
 		rw::models::WorkCell::Ptr _wc;
-		rw::kinematics::State _state;
 		rw::kinematics::State _defaultState;
+		rw::kinematics::State _state;
 		rwlibs::opengl::RenderImage *_textureRender, *_bgRender;
 		rwlibs::simulation::GLFrameGrabber* _framegrabber;
 
-		Marker *marker = NULL;
-		IK *ik = NULL;
+		testMarker * temp_marker = NULL;
 
 		MovableFrame* frameMarker = NULL;
 		Device::Ptr deviceRobot = NULL;

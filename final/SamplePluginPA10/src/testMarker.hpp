@@ -1,5 +1,5 @@
 /*
- * Marker.h
+ * testMarker.h
  *
  *  Created on: Nov 22, 2016
  *      Author: theis
@@ -7,6 +7,8 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <iostream>
 
 #include <rw/rw.hpp>
 #include <rw/kinematics/State.hpp>
@@ -16,34 +18,30 @@
 #include <rwlibs/simulation/GLFrameGrabber.hpp>
 #include <rws/RobWorkStudioPlugin.hpp>
 #include <rws/RobWorkStudio.hpp>
-
 #include <opencv2/opencv.hpp>
 
-#ifndef MARKER_H_
-#define MARKER_H_
+#ifndef TESTMARKER_H_
+#define TESTMARKER_H_
 
-class Marker {
+class testMarker {
 	//	Public methods
 	public:
-		Marker( std::string );
-		virtual ~Marker();
-		Transform3D<> T1 &step();
+		testMarker( std::string );
+		virtual ~testMarker();
+		rw::math::Transform3D<> step();
 
 	//	Private methods
 	private:
-		void loadTextFile( std::string );
+		void loadMotions( std::string );
 
 	//	Public attributes
 	public:
+		int index = 0;
 
 	//	Private attributes
 	private:
-		std::vector<std::vector<double> > stateList;
-		rw::math::Transform3D<> T1;
-		rw::kinematics::State state;
+		std::vector<std::vector<double> > motions;
 
-
-		int index = 0;
 };
 
-#endif /* MARKER_H_ */
+#endif /* TESTMARKER_H_ */

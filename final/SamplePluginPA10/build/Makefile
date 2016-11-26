@@ -204,6 +204,33 @@ src/moc_SamplePlugin.cxx.s:
 	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.s
 .PHONY : src/moc_SamplePlugin.cxx.s
 
+src/testMarker.o: src/testMarker.cpp.o
+
+.PHONY : src/testMarker.o
+
+# target to build an object file
+src/testMarker.cpp.o:
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o
+.PHONY : src/testMarker.cpp.o
+
+src/testMarker.i: src/testMarker.cpp.i
+
+.PHONY : src/testMarker.i
+
+# target to preprocess a source file
+src/testMarker.cpp.i:
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.i
+.PHONY : src/testMarker.cpp.i
+
+src/testMarker.s: src/testMarker.cpp.s
+
+.PHONY : src/testMarker.s
+
+# target to generate assembly for a file
+src/testMarker.cpp.s:
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.s
+.PHONY : src/testMarker.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -222,6 +249,9 @@ help:
 	@echo "... src/moc_SamplePlugin.o"
 	@echo "... src/moc_SamplePlugin.i"
 	@echo "... src/moc_SamplePlugin.s"
+	@echo "... src/testMarker.o"
+	@echo "... src/testMarker.i"
+	@echo "... src/testMarker.s"
 .PHONY : help
 
 
