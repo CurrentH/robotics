@@ -26,11 +26,12 @@ class testIK {
 	public:
 		testIK();
 		virtual ~testIK();
-		rw::kinematics::State &step();
+		rw::math::Q step();
 
 	//	Private methods
 	private:
-
+		rw::math::VelocityScrew6D<double> calculateDeltaU(rw::math::Transform3D<double>, rw::math::Transform3D<double>);
+		rw::math::Q algorithm1(const rw::models::Device::Ptr, rw::kinematics::State, const rw::kinematics::Frame*, const rw::math::Transform3D<double>, const rw::math::Q);
 
 	//	Public attributes
 	public:

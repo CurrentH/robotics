@@ -31,24 +31,12 @@ SamplePlugin::~SamplePlugin(){
 }
 
 void SamplePlugin::initialize() {
-	log().info() << "INITALIZE - START\n";
-
 	getRobWorkStudio()->stateChangedEvent().add(boost::bind(&SamplePlugin::stateChangedListener, this, _1), this);
 	WorkCell::Ptr wc = WorkCellLoader::Factory::load("/home/theis/workspace/robotics/PA10WorkCell/ScenePA10RoVi1.wc.xml");
 	getRobWorkStudio()->setWorkCell(wc);
 
-	std::string filename = "/home/theis/workspace/robotics/final/SamplePluginPA10/motions/MarkerMotionSlow.txt";
-	temp_marker = new testMarker( filename );
-
-	frameMarker = (MovableFrame*) wc->findFrame("Marker");
-	if (frameMarker == NULL){
-		log().info() << "Device: Marker" << " not found!\n";
-	}
-	deviceRobot = wc->findDevice("PA10");
-	if (deviceRobot == NULL){
-		log().info() << "Device: PA10" << " not found!\n";
-	}
-	log().info() << "INITALIZE - DONE\n";
+	temp_marker = new testMarker("/home/theis/workspace/robotics/final/SamplePluginPA10/motions/MarkerMotionSlow.txt");
+	temp_ik = new testIK();
 }
 
 void SamplePlugin::open(WorkCell* workcell)
@@ -159,10 +147,8 @@ void SamplePlugin::timer() {
 		//Vector3D<> temp_vector = temp_marker.P();
 		//Rotation3D<> temp_rotation = temp_marker.R();
 
-		Transform3D<> markerPR = frameMarker->getTransform(_state);
 		frameMarker->setTransform( temp_marker->step(), _state );
-		log().info() << temp_marker->index << "\t";
-		log().info() << markerPR << "\n\n";
+		deviceRobot->setQ( test_ik->setp(), _state );
 
 		getRobWorkStudio()->setState(_state);
 

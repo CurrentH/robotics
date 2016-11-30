@@ -22,7 +22,7 @@
 #include <rws/RobWorkStudio.hpp>
 
 #include <opencv2/opencv.hpp>
-#include "/home/theis/workspace/robotics/final/SamplePluginPA10/src/testMarker.hpp"
+#include "testMarker.hpp"
 #include "testIK.hpp"
 
 using namespace rw::common;
@@ -70,6 +70,7 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::Plugin
 		rwlibs::simulation::GLFrameGrabber* _framegrabber;
 
 		testMarker * temp_marker = NULL;
+		testIK * temp_ik = NULL;
 
 		MovableFrame* frameMarker = NULL;
 		Device::Ptr deviceRobot = NULL;
