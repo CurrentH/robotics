@@ -22,8 +22,8 @@
 #include <rws/RobWorkStudio.hpp>
 
 #include <opencv2/opencv.hpp>
-#include "/home/theis/workspace/robotics/final/SamplePluginPA10/src/testMarker.hpp"
-#include "/home/theis/workspace/robotics/final/SamplePluginPA10/src/testIK.hpp"
+#include "testMarker.hpp"
+#include "testIK.hpp"
 
 using namespace rw::common;
 using namespace rw::graphics;
@@ -43,6 +43,7 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::Plugin
 	Q_OBJECT
 	Q_INTERFACES( rws::RobWorkStudioPlugin )
 
+	//	Public methods
 	public:
 		SamplePlugin();
 		virtual ~SamplePlugin( );
@@ -50,30 +51,39 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::Plugin
 		virtual void close();
 		virtual void initialize();
 
+	//	Private QT methods
 	private slots:
 		void btnPressed();
 		void timer();
 		void stateChangedListener(const rw::kinematics::State& state);
 
+	//	Private methods
 	private:
 		void setupQT();
 		void setupVision();
-
 		static cv::Mat toOpenCVImage(const rw::sensor::Image& img);
 
+	//	Public attributes
+	public:
+
+	//	Private attributes
+	private:
 		QTimer* _timer;
 
 		rw::models::WorkCell::Ptr _wc;
 		rw::kinematics::State _defaultState;
 		rw::kinematics::State _state;
-		rwlibs::opengl::RenderImage *_textureRender, *_bgRender;
+		rwlibs::opengl::RenderImage * _textureRender;
+		rwlibs::opengl::RenderImage * _bgRender;
 		rwlibs::simulation::GLFrameGrabber* _framegrabber;
+		RobWorkStudio * _rsHandle = NULL;
 
 		testMarker * temp_marker = NULL;
 		testIK * temp_ik = NULL;
 
-		MovableFrame * frameMarker = NULL;
-		Device::Ptr deviceRobot = NULL;
+		Device::Ptr _deviceRobot = NULL;
+		Frame* _cameraFrame = NULL;
+		MovableFrame * _frameMarker = NULL;
 
 		std::vector<std::vector<double> > data;
 };
