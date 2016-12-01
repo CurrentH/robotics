@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "qrc_resources.cxx"
   "CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o"
   "CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o"
+  "CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o"
   "CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o"
   "CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o"
   "../libs/release/libSamplePlugin.pdb"

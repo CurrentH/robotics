@@ -9,7 +9,6 @@
 
 testMarker::testMarker( std::string filename) {
 	loadMotions( filename );
-
 }
 
 testMarker::~testMarker() {

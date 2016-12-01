@@ -1,11 +1,14 @@
 /*
- * IK.h
+ * testIK.h
  *
  *  Created on: Nov 22, 2016
  *      Author: theis
  */
 
-//#include "computerVision.hpp"
+#include <vector>
+#include <string>
+#include <fstream>
+#include <iostream>
 
 #include <rw/rw.hpp>
 #include <rw/kinematics/State.hpp>
@@ -18,15 +21,15 @@
 
 #include <opencv2/opencv.hpp>
 
-#ifndef IK_H_
-#define IK_H_
+#ifndef testIK_H_
+#define testIK_H_
 
 class testIK {
 	//	Public methods
 	public:
 		testIK();
 		virtual ~testIK();
-		rw::kinematics::State &step();
+		rw::math::Q step();
 
 	//	Private methods
 	private:
@@ -37,10 +40,9 @@ class testIK {
 
 	//	Private attributes
 	private:
-		rw::kinematics::State state;
 
 
 
 };
 
-#endif /* IK_H_ */
+#endif /* testIK_H_ */

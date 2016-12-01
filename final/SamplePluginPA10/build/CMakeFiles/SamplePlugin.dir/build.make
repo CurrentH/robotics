@@ -120,9 +120,33 @@ CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o.provides: CMakeFiles/SamplePlug
 CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o.provides.build: CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o
 
 
+CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o: CMakeFiles/SamplePlugin.dir/flags.make
+CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o: ../src/testIK.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp
+
+CMakeFiles/SamplePlugin.dir/src/testIK.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SamplePlugin.dir/src/testIK.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/theis/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp > CMakeFiles/SamplePlugin.dir/src/testIK.cpp.i
+
+CMakeFiles/SamplePlugin.dir/src/testIK.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SamplePlugin.dir/src/testIK.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/theis/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp -o CMakeFiles/SamplePlugin.dir/src/testIK.cpp.s
+
+CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.requires:
+
+.PHONY : CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.requires
+
+CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.provides: CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.requires
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.provides.build
+.PHONY : CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.provides
+
+CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.provides.build: CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o
+
+
 CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o: CMakeFiles/SamplePlugin.dir/flags.make
 CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o: src/moc_SamplePlugin.cxx
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx
 
 CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.i: cmake_force
@@ -146,7 +170,7 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o.provides.build: CMakeFile
 
 CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o: CMakeFiles/SamplePlugin.dir/flags.make
 CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o: qrc_resources.cxx
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx
 
 CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.i: cmake_force
@@ -172,6 +196,7 @@ CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o.provides.build: CMakeFiles/Sampl
 SamplePlugin_OBJECTS = \
 "CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o" \
 "CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o" \
+"CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o" \
 "CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o" \
 "CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o"
 
@@ -180,6 +205,7 @@ SamplePlugin_EXTERNAL_OBJECTS =
 
 ../libs/release/libSamplePlugin.so: CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o
 ../libs/release/libSamplePlugin.so: CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o
+../libs/release/libSamplePlugin.so: CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o
 ../libs/release/libSamplePlugin.so: CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o
 ../libs/release/libSamplePlugin.so: CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o
 ../libs/release/libSamplePlugin.so: CMakeFiles/SamplePlugin.dir/build.make
@@ -320,7 +346,7 @@ SamplePlugin_EXTERNAL_OBJECTS =
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libQtGui.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libQtCore.so
 ../libs/release/libSamplePlugin.so: CMakeFiles/SamplePlugin.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX shared module ../libs/release/libSamplePlugin.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX shared module ../libs/release/libSamplePlugin.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SamplePlugin.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -330,6 +356,7 @@ CMakeFiles/SamplePlugin.dir/build: ../libs/release/libSamplePlugin.so
 
 CMakeFiles/SamplePlugin.dir/requires: CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o.requires
 CMakeFiles/SamplePlugin.dir/requires: CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o.requires
+CMakeFiles/SamplePlugin.dir/requires: CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.requires
 CMakeFiles/SamplePlugin.dir/requires: CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o.requires
 CMakeFiles/SamplePlugin.dir/requires: CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o.requires
 

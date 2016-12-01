@@ -204,6 +204,33 @@ src/moc_SamplePlugin.cxx.s:
 	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.s
 .PHONY : src/moc_SamplePlugin.cxx.s
 
+src/testIK.o: src/testIK.cpp.o
+
+.PHONY : src/testIK.o
+
+# target to build an object file
+src/testIK.cpp.o:
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o
+.PHONY : src/testIK.cpp.o
+
+src/testIK.i: src/testIK.cpp.i
+
+.PHONY : src/testIK.i
+
+# target to preprocess a source file
+src/testIK.cpp.i:
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/testIK.cpp.i
+.PHONY : src/testIK.cpp.i
+
+src/testIK.s: src/testIK.cpp.s
+
+.PHONY : src/testIK.s
+
+# target to generate assembly for a file
+src/testIK.cpp.s:
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/testIK.cpp.s
+.PHONY : src/testIK.cpp.s
+
 src/testMarker.o: src/testMarker.cpp.o
 
 .PHONY : src/testMarker.o
@@ -249,6 +276,9 @@ help:
 	@echo "... src/moc_SamplePlugin.o"
 	@echo "... src/moc_SamplePlugin.i"
 	@echo "... src/moc_SamplePlugin.s"
+	@echo "... src/testIK.o"
+	@echo "... src/testIK.i"
+	@echo "... src/testIK.s"
 	@echo "... src/testMarker.o"
 	@echo "... src/testMarker.i"
 	@echo "... src/testMarker.s"

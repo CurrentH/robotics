@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/theis/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx" "/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o"
   "/home/theis/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.cpp" "/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o"
   "/home/theis/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx" "/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o"
+  "/home/theis/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp" "/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o"
   "/home/theis/workspace/robotics/final/SamplePluginPA10/src/testMarker.cpp" "/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

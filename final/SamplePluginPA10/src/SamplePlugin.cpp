@@ -25,7 +25,8 @@ SamplePlugin::SamplePlugin(): RobWorkStudioPlugin("PluginUI", QIcon(":/pa_icon.p
 	setupVision();
 }
 
-SamplePlugin::~SamplePlugin(){
+SamplePlugin::~SamplePlugin()
+{
 	delete _textureRender;
 	delete _bgRender;
 }
@@ -39,6 +40,7 @@ void SamplePlugin::initialize() {
 
 	std::string filename = "/home/theis/workspace/robotics/final/SamplePluginPA10/motions/MarkerMotionSlow.txt";
 	temp_marker = new testMarker( filename );
+	temp_ik = new testIK();
 
 	frameMarker = (MovableFrame*) wc->findFrame("Marker");
 	if (frameMarker == NULL){
@@ -154,15 +156,17 @@ void SamplePlugin::timer() {
 		 * 		Do a test if the output from the marker->step is the same as getQ.
 		 * 		We want to use these to update the states for the device.
 		 */
-		//Q temp = deviceRobot->getQ(_state);
-		//deviceRobot->setQ( temp,_state );
-		//Vector3D<> temp_vector = temp_marker.P();
-		//Rotation3D<> temp_rotation = temp_marker.R();
-
-		Transform3D<> markerPR = frameMarker->getTransform(_state);
 		frameMarker->setTransform( temp_marker->step(), _state );
+		//deviceRobot->setQ( temp_ik->step(), _state );
+
+		/*
+		 * Some problem here with the amount of stuff
+		 *
+		 */
+
 		log().info() << temp_marker->index << "\t";
-		log().info() << markerPR << "\n\n";
+		log().info() << deviceRobot->getQ(_state) << "\n";
+		log().info() << frameMarker->getTransform(_state) << "\n\n";
 
 		getRobWorkStudio()->setState(_state);
 
