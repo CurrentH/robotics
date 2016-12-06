@@ -7,8 +7,8 @@
 
 #include "/home/theis/workspace/robotics/final/SamplePluginPA10/src/testMarker.hpp"
 
-testMarker::testMarker( std::string filename) {
-	loadMotions( filename );
+testMarker::testMarker(std::string filename) {
+	loadMotions(filename);
 }
 
 testMarker::~testMarker() {

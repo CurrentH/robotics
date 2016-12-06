@@ -19,11 +19,35 @@ void SamplePlugin::setupVision(){
 	_framegrabber = NULL;
 }
 
+void SamplePlugin::setupHandles(){
+	_wc = WorkCellLoader::Factory::load("/home/theis/workspace/robotics/PA10WorkCell/ScenePA10RoVi1.wc.xml");
+
+	_rsHandle = getRobWorkStudio();
+	_rsHandle->stateChangedEvent().add(boost::bind(&SamplePlugin::stateChangedListener, this, _1), this);
+	_rsHandle->setWorkCell(_wc);
+
+	_state = _wc->getDefaultState();
+
+	_frameMarker = (MovableFrame*) _wc->findFrame("Marker");
+	_deviceRobot = _wc->findDevice("PA10");
+}
+
+void SamplePlugin::setupIK(){
+	temp_ik = new testIK( 0.1 );
+	temp_ik->setCurrentState( _state );
+	temp_ik->setDevice( _wc );
+	temp_ik->setToolFrame( _wc );
+	temp_ik->setWorkspace( _wc );
+}
+
+void SamplePlugin::setupMarker(){
+	temp_marker = new testMarker("/home/theis/workspace/robotics/final/SamplePluginPA10/motions/MarkerMotionMedium.txt");
+}
+
 SamplePlugin::SamplePlugin(): RobWorkStudioPlugin("PluginUI", QIcon(":/pa_icon.png"))
 {
 	setupQT();
 	setupVision();
-	RobWorkStudio * _rsHandle = getRobWorkStudio();
 }
 
 SamplePlugin::~SamplePlugin()
@@ -33,25 +57,22 @@ SamplePlugin::~SamplePlugin()
 }
 
 void SamplePlugin::initialize() {
-	_rsHandle->stateChangedEvent().add(boost::bind(&SamplePlugin::stateChangedListener, this, _1), this);
-	WorkCell::Ptr wc = WorkCellLoader::Factory::load("/home/theis/workspace/robotics/PA10WorkCell/ScenePA10RoVi1.wc.xml");
-	_rsHandle->setWorkCell(wc);
+	setupHandles();
+	setupIK();
+	setupMarker();
 
-	temp_marker = new testMarker("/home/theis/workspace/robotics/final/SamplePluginPA10/motions/MarkerMotionSlow.txt");
-	temp_ik = new testIK();
+	_defaultState = _state;
 
-	_frameMarker = (MovableFrame*) wc->findFrame("Marker");
-	_deviceRobot = wc->findDevice("PA10");
+	//	Set initial position of robot. (Maybe throw into testIK?)
+	rw::math::Q start(7, 0, -0.65, 0, 1.8, 0, 0.42, 0);
+	_deviceRobot->setQ(start , _state );
+	_rsHandle->setState(_state);
+
 }
 
 void SamplePlugin::open(WorkCell* workcell)
 {
-	log().info() << "OPEN" << "\n";
-	_wc = workcell;
-	_state = _wc->getDefaultState();
-	_defaultState = _state;
-
-	log().info() << workcell->getFilename() << "\n";
+	log().info() << "OPEN: " << workcell->getFilename() << "\n";
 
 	if (_wc != NULL) {
 		// Add the texture render to this workcell if there is a frame for texture
@@ -144,16 +165,22 @@ void SamplePlugin::btnPressed() {
 			_timer->stop();
 			log().info() << "Timer off\n";
 		}
-
 	}
 }
 
 void SamplePlugin::timer() {
 	if(_framegrabber != NULL )
 	{
-		_frameMarker->setTransform( temp_marker->step(), _state );
-		_deviceRobot->setQ( temp_ik->step(), _state );
+		_frameMarker->setTransform(temp_marker->step(), _state);
+		_deviceRobot->setQ(temp_ik->step(), _state);
 		_rsHandle->setState(_state);
+
+		log().info() << "1: " << temp_ik->temp1 << "\n";
+		log().info() << "2: " << temp_ik->temp2 << "\n";
+		log().info() << "3: " << temp_ik->temp3 << "\n\n";
+
+		log().info() << "1: " << _deviceRobot->getQ(_defaultState) << "\n";
+		log().info() << "2: " << _deviceRobot->getQ(_state) << "\n\n";
 
 		// Get the image as a RW image
 		_framegrabber->grab(_cameraFrame, _state);
@@ -172,6 +199,8 @@ void SamplePlugin::timer() {
 		_cameraView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
 		_cvView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
 	}
+
+	temp_ik->setCurrentState(_state);
 }
 
 void SamplePlugin::stateChangedListener(const State& state) {

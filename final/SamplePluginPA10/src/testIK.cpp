@@ -7,12 +7,15 @@
 
 #include "testIK.hpp"
 
-testIK::testIK() {
-
-	maxVelocity = _device->getVelocityLimits();
+testIK::testIK( double dT ) {
+	_dT = dT;
 }
 
 testIK::~testIK() {
+}
+
+void testIK::setWorkspace( rw::models::WorkCell::Ptr wc ){
+	_wc = wc;
 }
 
 void testIK::setCurrentState( rw::kinematics::State state ){
@@ -21,14 +24,41 @@ void testIK::setCurrentState( rw::kinematics::State state ){
 
 void testIK::setDevice( rw::models::WorkCell::Ptr wc ){
 	_device = wc->findDevice("PA10");
+	_maxJointVelocity = _device->getVelocityLimits();
 }
 
 void testIK::setToolFrame( rw::models::WorkCell::Ptr wc ){
 	_toolFrame = wc->findFrame("CameraSim");
 }
 
+rw::math::Transform3D<> testIK::getMarkerTransformation(){
+	rw::kinematics::FKRange forwardKinematicRangeMarker( _device->getBase(), _wc->findFrame("Marker"), _state );
+	return forwardKinematicRangeMarker.get( _state );
+}
+
+rw::math::Transform3D<> testIK::getCameraTransformation(){
+	rw::kinematics::FKRange forwardKinematicRangeCamera( _device->getBase(), _wc->findFrame("CameraSim"), _state );
+	return forwardKinematicRangeCamera.get( _state );
+}
+
+rw::math::Transform3D<> testIK::getTrueMarkerPosition(){
+	rw::math::Transform3D<> cameraTransformation = getCameraTransformation();
+	rw::math::Transform3D<> markerTransformation = getMarkerTransformation();
+
+	rw::math::Vector3D<> positionOffset(-0.5, 0, 0); //	We need to keep the robot 0.5m back.
+	rw::math::Vector3D<> desiredPosition = markerTransformation.P() + positionOffset;
+	rw::math::Rotation3D<> desiredRotation = cameraTransformation.R();
+	rw::math::Transform3D<> desired_transform( desiredPosition, desiredRotation);
+
+	temp1 = markerTransformation;
+	temp2 = cameraTransformation;
+	temp3 = desired_transform;
+
+	return desired_transform;
+}
+
 rw::math::Jacobian testIK::getJacobian(){
-	double z = 100;
+	double z = 100;	//Der står vist at denne skal være 0.5m.
 	double f = 823;
 	double u = 0;	//double u = vision->getChangeU();
 	double v = 0; 	//double v = vision->getChangeV();
@@ -54,33 +84,34 @@ rw::math::Jacobian testIK::getJacobian(){
 rw::math::Q testIK::bracketJointVelocity( rw::math::Q _q ){
 	rw::math::Q q = _q;
 
-	/**
-	 * 	Make for loop, and check if the new velocities are okay.
-	 */
+	for( unsigned int i = 0; i < q.m().size(); i++ ){
+		double currentJointVelocity = q[i] - _device->getQ( _state )(i);
+		if( fabs(currentJointVelocity) > _maxJointVelocity[i] * _dT ){
+			if( currentJointVelocity > 0){
+				q[i] = _maxJointVelocity[i] * _dT;
+			}else{
+				q[i] = -_maxJointVelocity[i] * _dT;
+			}
+		}
+	}
 
 	return q;
 }
 
 rw::math::Q testIK::step(){
-	// Get configuration, q
+	// 	Get current camera position.
 	rw::math::Q q_cur = _device->getQ(_state);
 
-	// Get transformation T_base_camera
-	const rw::math::Transform3D<double> baseTcamera = _device->baseTframe(_toolFrame, _state);
-
-	// Choose a small positional change, deltaP (ca. 10^-4)
-	const double delta = 0.0001;
-	const rw::math::Vector3D<double> deltaP(delta, delta, delta);
-
-	// Choose baseTtool_desired by adding the positional change deltaP to the position part of baseTtool
-	const rw::math::Transform3D<double> deltaPdesired = baseTcamera.P() + deltaP;
-	const rw::math::Transform3D<double> baseTcamera_desired(deltaPdesired, baseTcamera.R());
+	//	Get desired camera position.
+	rw::math::Transform3D<double> baseTcamera_desired = getTrueMarkerPosition();
 
 	// Apply algorithm 1
-	return algorithm1( baseTcamera_desired, q_cur );
+	return bracketJointVelocity( algorithm1( baseTcamera_desired, q_cur ) );
+	//return bracketJointVelocity( algorithm1(_device, _state, _toolFrame, baseTcamera_desired, q_cur) );
 }
 
-rw::math::VelocityScrew6D<double> testIK::calculateDeltaU(rw::math::Transform3D<double> baseTtool, rw::math::Transform3D<double> baseTtool_desired) {
+rw::math::VelocityScrew6D<double> testIK::calculateDeltaU(rw::math::Transform3D<double> baseTtool,
+																rw::math::Transform3D<double> baseTtool_desired) {
     // Calculate dp
     rw::math::Vector3D<double> dp = baseTtool_desired.P() - baseTtool.P();
 
@@ -90,9 +121,41 @@ rw::math::VelocityScrew6D<double> testIK::calculateDeltaU(rw::math::Transform3D<
     return rw::math::VelocityScrew6D<double>(dp, dw);
 }
 
-void testIK::setDesiredChange(){
+rw::math::Q testIK::algorithm1(const rw::models::Device::Ptr device, rw::kinematics::State state, const rw::kinematics::Frame* tool,
+                       const rw::math::Transform3D<double> baseTtool_desired, const rw::math::Q q_in) {
 
+    auto baseTtool = device->baseTframe(tool, state);
+    auto deltaU = calculateDeltaU(baseTtool, baseTtool_desired);
+    rw::math::Q q = q_in;
+    const double epsilon = 0.0001;
+    while(deltaU.norm2() > epsilon) {
+        auto J = device->baseJframe(tool, state);
+        rw::math::Q deltaQ(J.e().inverse() * deltaU.e());
+        q += deltaQ;
+        device->setQ(q, state);
+        baseTtool = device->baseTframe(tool, state);
+        deltaU = calculateDeltaU(baseTtool, baseTtool_desired);
+    }
+    return q;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 rw::math::Q testIK::algorithm1(const rw::math::Transform3D<double> baseTtool_desired, const rw::math::Q q_in) {
 
@@ -101,7 +164,7 @@ rw::math::Q testIK::algorithm1(const rw::math::Transform3D<double> baseTtool_des
     rw::math::Q q = q_in;
 
     const double epsilon = 0.0001;
-    while(deltaU.norm2() > epsilon) {
+    while( deltaU.norm2() > epsilon ) {
     	rw::math::Jacobian J = _device->baseJframe(_toolFrame, _state);
         rw::math::Q deltaQ(J.e().inverse() * deltaU.e());
         q += deltaQ;
