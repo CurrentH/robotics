@@ -49,14 +49,12 @@ class testIK {
 		void setToolFrame( rw::models::WorkCell::Ptr );
 		void setWorkspace( rw::models::WorkCell::Ptr wc );
 
+		void resetPose();
+
 	//	Private methods
 	private:
 		rw::math::VelocityScrew6D<double> calculateDeltaU(rw::math::Transform3D<double>, rw::math::Transform3D<double>);
 		rw::math::Q algorithm1(const rw::math::Transform3D<double>, const rw::math::Q);
-
-		rw::math::Q algorithm1(const rw::models::Device::Ptr, rw::kinematics::State, const rw::kinematics::Frame*,
-		                       const rw::math::Transform3D<double>, const rw::math::Q);
-
 
 		rw::math::Transform3D<> getMarkerTransformation();
 		rw::math::Transform3D<> getCameraTransformation();
@@ -74,11 +72,16 @@ class testIK {
 
 	//	Private attributes
 	private:
+		bool doLogging = true;
+
 		Device::Ptr _device;
 		Frame* _toolFrame = NULL;
 		rw::kinematics::State _state;
 		rw::models::WorkCell::Ptr _wc;
 
+		std::vector<rw::math::Transform3D<> > logToolPose;
+		std::vector<rw::math::Q > logJointPosition;
+		std::vector<rw::math::Q > logJointVelocity;
 
 		rw::math::Q _maxJointVelocity;
 		double _dT;

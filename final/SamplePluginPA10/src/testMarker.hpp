@@ -28,11 +28,12 @@ class testMarker {
 	public:
 		testMarker( std::string );
 		virtual ~testMarker();
+
+		void loadMotions( std::string );
 		rw::math::Transform3D<> step();
 
 	//	Private methods
 	private:
-		void loadMotions( std::string );
 
 	//	Public attributes
 	public:

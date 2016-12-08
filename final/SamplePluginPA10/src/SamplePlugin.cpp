@@ -6,9 +6,13 @@ void SamplePlugin::setupQT(){
 	_timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(timer()));
 
-	// now connect stuff from the ui component
-	connect(_btn0    ,SIGNAL(pressed()), this, SLOT(btnPressed()) );
-	connect(_btn1    ,SIGNAL(pressed()), this, SLOT(btnPressed()) );
+	// COnnect stuff to UI
+	connect(_btnStart    	,SIGNAL(pressed()), this, SLOT(btnPressed()) );
+	connect(_btnStop    	,SIGNAL(pressed()), this, SLOT(btnPressed()) );
+	connect(_btnRestart		,SIGNAL(pressed()), this, SLOT(btnPressed()) );
+
+	connect(_ddMarker  		,SIGNAL(currentIndexChanged(QString )), this, SLOT(ddMarker(QString)) );
+	connect(_ddSequence		,SIGNAL(currentIndexChanged(QString )), this, SLOT(ddSequence(QString)) );
 }
 
 void SamplePlugin::setupVision(){
@@ -33,15 +37,25 @@ void SamplePlugin::setupHandles(){
 }
 
 void SamplePlugin::setupIK(){
-	temp_ik = new testIK( 0.1 );
+	temp_ik = new testIK( 0.1 ); //todo: define global dT?
 	temp_ik->setCurrentState( _state );
 	temp_ik->setDevice( _wc );
 	temp_ik->setToolFrame( _wc );
 	temp_ik->setWorkspace( _wc );
+
+	temp_ik->resetPose();
+	_rsHandle->setState(_state);
 }
 
 void SamplePlugin::setupMarker(){
 	temp_marker = new testMarker("/home/theis/workspace/robotics/final/SamplePluginPA10/motions/MarkerMotionMedium.txt");
+}
+
+void SamplePlugin::setupBackground(){
+	Image::Ptr image;
+	image = ImageLoader::Factory::load("/home/theis/workspace/robotics/final/SamplePluginPA10/backgrounds/color1.ppm");
+	_bgRender->setImage(*image);
+	_rsHandle->updateAndRepaint();
 }
 
 SamplePlugin::SamplePlugin(): RobWorkStudioPlugin("PluginUI", QIcon(":/pa_icon.png"))
@@ -60,14 +74,12 @@ void SamplePlugin::initialize() {
 	setupHandles();
 	setupIK();
 	setupMarker();
+	setupBackground();
+
+	ddMarker( "Marker1.ppm" );
+	ddSequence( "MarkerMotionSlow.txt" );
 
 	_defaultState = _state;
-
-	//	Set initial position of robot. (Maybe throw into testIK?)
-	rw::math::Q start(7, 0, -0.65, 0, 1.8, 0, 0.42, 0);
-	_deviceRobot->setQ(start , _state );
-	_rsHandle->setState(_state);
-
 }
 
 void SamplePlugin::open(WorkCell* workcell)
@@ -95,8 +107,6 @@ void SamplePlugin::open(WorkCell* workcell)
 				double fovy;
 				int width,height;
 				std::string camParam = _cameraFrame->getPropertyMap().get<std::string>("Camera");
-				//TODO:
-				//std::istringstream iss (camParam, std::istringstream::in);
 				std::istringstream iss (camParam);
 				iss >> fovy >> width >> height;
 				// Create a frame grabber
@@ -130,8 +140,18 @@ void SamplePlugin::close() {
 		delete _framegrabber;
 	}
 
+	if ( temp_ik != NULL ) {
+		delete temp_ik;
+	}
+
+	if ( temp_marker != NULL ) {
+		delete temp_marker;
+	}
+
 	_framegrabber = NULL;
 	_wc = NULL;
+	temp_ik = NULL;
+	temp_marker = NULL;
 }
 
 Mat SamplePlugin::toOpenCVImage(const Image& img) {
@@ -142,31 +162,47 @@ Mat SamplePlugin::toOpenCVImage(const Image& img) {
 
 void SamplePlugin::btnPressed() {
 	QObject *obj = sender();
-	if(obj==_btn0){
-		log().info() << "Button 0\n";
-
-		Image::Ptr image;
-		image = ImageLoader::Factory::load("/home/theis/workspace/robotics/final/SamplePluginPA10/markers/Marker1.ppm");
-		_textureRender->setImage(*image);
-
-		image = ImageLoader::Factory::load("/home/theis/workspace/robotics/final/SamplePluginPA10/backgrounds/color1.ppm");
-		_bgRender->setImage(*image);
-		_rsHandle->updateAndRepaint();
-
+	if(obj==_btnStart){
+		log().info() << "Start\n";
+		if(!_timer->isActive()){
+			_timer->start(100);
+			log().info() << "\t - Timer on\n";
+		}
 	}
-	else if(obj==_btn1){
+	else if(obj==_btnStop){
 		// Toggle the timer on and off
-		log().info() << "Button 1 - ";
-		if (!_timer->isActive()){
-			_timer->start(100); // run 10 Hz
-			log().info() << "Timer on\n";
-		}
-		else{
+		log().info() << "Stop\n";
+		if (_timer->isActive()){
 			_timer->stop();
-			log().info() << "Timer off\n";
+			log().info() << "\t - Timer off\n";
 		}
+	}
+	else if(obj==_btnRestart){
+		log().info() << "Restart\n";
+		//	todo:Do stuff
 	}
 }
+
+void SamplePlugin::ddMarker( QString file ){
+	std::string path = "/home/theis/workspace/robotics/final/SamplePluginPA10/markers/";
+	std::string _file = file.toUtf8().constData();
+	std::string temp = std::string(path) + std::string(_file);
+
+	Image::Ptr imageMarker = ImageLoader::Factory::load(temp);
+	_textureRender->setImage(*imageMarker);
+	_rsHandle->updateAndRepaint();
+
+	log().info() << "Marker: " << _file << "\n";
+}
+
+void SamplePlugin::ddSequence( QString file ){
+	std::string path = "/home/theis/workspace/robotics/final/SamplePluginPA10/motions/";
+	std::string _file = file.toUtf8().constData();
+	std::string temp = std::string(path) + std::string(_file);
+
+	temp_marker->loadMotions(temp);
+}
+
 
 void SamplePlugin::timer() {
 	if(_framegrabber != NULL )
@@ -199,7 +235,10 @@ void SamplePlugin::timer() {
 		_cameraView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
 		_cvView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
 	}
+	updateState();
+}
 
+void SamplePlugin::updateState(){
 	temp_ik->setCurrentState(_state);
 }
 

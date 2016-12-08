@@ -9,7 +9,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
-#include <QtGui/QCalendarWidget>
+#include <QtGui/QComboBox>
 #include <QtGui/QCheckBox>
 #include <QtGui/QDockWidget>
 #include <QtGui/QHeaderView>
@@ -29,8 +29,12 @@ public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
 
-    QPushButton *_btn0;
-    QPushButton *_btn1;
+    QPushButton *_btnStart;
+    QPushButton *_btnStop;
+    QPushButton *_btnRestart;
+
+    QComboBox *_ddMarker;
+	QComboBox *_ddSequence;
 
     QCheckBox *_checkBox;
 
@@ -57,17 +61,30 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
 
         //	Buttons
-        QGridLayout * gridForButtons = new QGridLayout(dockWidgetContents);
+        QGridLayout * gridForStuff = new QGridLayout(dockWidgetContents);
 
-        _btn0 = new QPushButton(dockWidgetContents);
-        _btn0->setObjectName(QString::fromUtf8("_btn0"));
-        gridForButtons->addWidget(_btn0,0,0,1,1,Qt::AlignVCenter | Qt::AlignLeft);
+        _btnStart = new QPushButton(dockWidgetContents);
+        _btnStart->setObjectName(QString::fromUtf8("Start"));
+        gridForStuff->addWidget(_btnStart, 0, 0, 1, 1);
 
-        _btn1 = new QPushButton(dockWidgetContents);
-        _btn1->setObjectName(QString::fromUtf8("_btn1"));
-        gridForButtons->addWidget(_btn1,0,1,1,1,Qt::AlignVCenter | Qt::AlignRight);
+        _btnStop = new QPushButton(dockWidgetContents);
+        _btnStop->setObjectName(QString::fromUtf8("Stop"));
+        gridForStuff->addWidget(_btnStop, 0, 1, 1, 1);
 
-        verticalLayout->addLayout(gridForButtons);
+        _btnRestart = new QPushButton(dockWidgetContents);
+        _btnRestart->setObjectName(QString::fromUtf8("Restart"));
+		gridForStuff->addWidget(_btnRestart, 0, 2, 1, 1);
+
+        //	Drop down bars
+		_ddMarker = new QComboBox(dockWidgetContents);
+		_ddMarker->setObjectName(QString::fromUtf8("ddMarker"));
+		gridForStuff->addWidget(_ddMarker, 1, 0, 1, 1);
+
+		_ddSequence = new QComboBox(dockWidgetContents);
+		_ddSequence->setObjectName(QString::fromUtf8("ddMarker"));
+		gridForStuff->addWidget(_ddSequence, 1, 2, 1, 1);
+
+        verticalLayout->addLayout(gridForStuff);
 
         //	Checkboxes
         _checkBox = new QCheckBox(dockWidgetContents);
@@ -114,13 +131,31 @@ public:
     void retranslateUi(QDockWidget *SamplePlugin)
     {
         SamplePlugin->setWindowTitle(QApplication::translate("SamplePlugin", "DockWidget", 0, QApplication::UnicodeUTF8));
-        _btn0->setText(QApplication::translate("SamplePlugin", "Button 0", 0, QApplication::UnicodeUTF8));
-        _btn1->setText(QApplication::translate("SamplePlugin", "Button 1", 0, QApplication::UnicodeUTF8));
+
+        _btnStart->setText(QApplication::translate("SamplePlugin", "Start", 0, QApplication::UnicodeUTF8));
+        _btnStop->setText(QApplication::translate("SamplePlugin", "Stop", 0, QApplication::UnicodeUTF8));
+        _btnRestart->setText(QApplication::translate("SamplePlugin", "Restart", 0, QApplication::UnicodeUTF8));
+
+        _ddMarker->clear();
+        _ddMarker->insertItems(0, QStringList()
+		 << QApplication::translate("SamplePlugin", "Marker1.ppm", 0, QApplication::UnicodeUTF8)
+		 << QApplication::translate("SamplePlugin", "Marker2a.ppm", 0, QApplication::UnicodeUTF8)
+		 << QApplication::translate("SamplePlugin", "Marker2b.ppm", 0, QApplication::UnicodeUTF8)
+		 << QApplication::translate("SamplePlugin", "Marker3.ppm", 0, QApplication::UnicodeUTF8)
+		);
+
+		_ddSequence->clear();
+		_ddSequence->insertItems(0, QStringList()
+		 << QApplication::translate("SamplePlugin", "MarkerMotionSlow.txt", 0, QApplication::UnicodeUTF8)
+		 << QApplication::translate("SamplePlugin", "MarkerMotionMedium.txt", 0, QApplication::UnicodeUTF8)
+		 << QApplication::translate("SamplePlugin", "MarkerMotionFast.txt", 0, QApplication::UnicodeUTF8)
+		);
+
         _checkBox->setText(QApplication::translate("SamplePlugin", "CheckBox", 0, QApplication::UnicodeUTF8));
+
         _cameraView->setText(QApplication::translate("SamplePlugin", "Camera view", 0, QApplication::UnicodeUTF8));
         _cameraView->setText(QApplication::translate("SamplePlugin", "Computer view", 0, QApplication::UnicodeUTF8));
-    } // retranslateUi
-
+    }
 };
 
 namespace Ui {

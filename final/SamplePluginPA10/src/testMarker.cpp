@@ -28,6 +28,8 @@ void testMarker::loadMotions(std::string filename){
 	std::ifstream file(filename);
 	std::string word;
 
+	if( !motions.size() ){ motions.clear(); }
+
 	int wordCount = 0;
 
 	if (file.is_open()){

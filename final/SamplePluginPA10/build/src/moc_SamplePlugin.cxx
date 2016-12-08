@@ -22,7 +22,7 @@ static const uint qt_meta_data_SamplePlugin[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -33,6 +33,8 @@ static const uint qt_meta_data_SamplePlugin[] = {
       14,   13,   13,   13, 0x08,
       27,   13,   13,   13, 0x08,
       41,   35,   13,   13, 0x08,
+      85,   13,   13,   13, 0x08,
+     103,   13,   13,   13, 0x08,
 
        0        // eod
 };
@@ -40,6 +42,7 @@ static const uint qt_meta_data_SamplePlugin[] = {
 static const char qt_meta_stringdata_SamplePlugin[] = {
     "SamplePlugin\0\0btnPressed()\0timer()\0"
     "state\0stateChangedListener(rw::kinematics::State)\0"
+    "ddMarker(QString)\0ddSequence(QString)\0"
 };
 
 void SamplePlugin::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -51,6 +54,8 @@ void SamplePlugin::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 0: _t->btnPressed(); break;
         case 1: _t->timer(); break;
         case 2: _t->stateChangedListener((*reinterpret_cast< const rw::kinematics::State(*)>(_a[1]))); break;
+        case 3: _t->ddMarker((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: _t->ddSequence((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -92,9 +97,9 @@ int SamplePlugin::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 5;
     }
     return _id;
 }

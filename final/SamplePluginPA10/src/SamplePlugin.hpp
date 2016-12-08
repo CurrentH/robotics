@@ -56,6 +56,9 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::Plugin
 		void btnPressed();
 		void timer();
 		void stateChangedListener(const rw::kinematics::State& state);
+		void ddMarker( QString );
+		void ddSequence( QString);
+
 
 	//	Private methods
 	private:
@@ -64,6 +67,9 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::Plugin
 		void setupHandles();
 		void setupIK();
 		void setupMarker();
+		void setupBackground();
+
+		void updateState();
 
 		static cv::Mat toOpenCVImage(const rw::sensor::Image& img);
 

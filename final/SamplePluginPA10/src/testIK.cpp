@@ -31,6 +31,11 @@ void testIK::setToolFrame( rw::models::WorkCell::Ptr wc ){
 	_toolFrame = wc->findFrame("CameraSim");
 }
 
+void testIK::resetPose(){
+	rw::math::Q pose(7, 0, -0.65, 0, 1.8, 0, 0.42, 0);
+	_device->setQ( pose, _state );
+}
+
 rw::math::Transform3D<> testIK::getMarkerTransformation(){
 	rw::kinematics::FKRange forwardKinematicRangeMarker( _device->getBase(), _wc->findFrame("Marker"), _state );
 	return forwardKinematicRangeMarker.get( _state );
@@ -53,6 +58,8 @@ rw::math::Transform3D<> testIK::getTrueMarkerPosition(){
 	temp1 = markerTransformation;
 	temp2 = cameraTransformation;
 	temp3 = desired_transform;
+
+	if( doLogging ){ logToolPose.push_back( cameraTransformation ); }
 
 	return desired_transform;
 }
@@ -105,13 +112,11 @@ rw::math::Q testIK::step(){
 	//	Get desired camera position.
 	rw::math::Transform3D<double> baseTcamera_desired = getTrueMarkerPosition();
 
-	// Apply algorithm 1
+	//	Apply algorithm 1
 	return bracketJointVelocity( algorithm1( baseTcamera_desired, q_cur ) );
-	//return bracketJointVelocity( algorithm1(_device, _state, _toolFrame, baseTcamera_desired, q_cur) );
 }
 
-rw::math::VelocityScrew6D<double> testIK::calculateDeltaU(rw::math::Transform3D<double> baseTtool,
-																rw::math::Transform3D<double> baseTtool_desired) {
+rw::math::VelocityScrew6D<double> testIK::calculateDeltaU(rw::math::Transform3D<double> baseTtool, rw::math::Transform3D<double> baseTtool_desired) {
     // Calculate dp
     rw::math::Vector3D<double> dp = baseTtool_desired.P() - baseTtool.P();
 
@@ -120,42 +125,6 @@ rw::math::VelocityScrew6D<double> testIK::calculateDeltaU(rw::math::Transform3D<
 
     return rw::math::VelocityScrew6D<double>(dp, dw);
 }
-
-rw::math::Q testIK::algorithm1(const rw::models::Device::Ptr device, rw::kinematics::State state, const rw::kinematics::Frame* tool,
-                       const rw::math::Transform3D<double> baseTtool_desired, const rw::math::Q q_in) {
-
-    auto baseTtool = device->baseTframe(tool, state);
-    auto deltaU = calculateDeltaU(baseTtool, baseTtool_desired);
-    rw::math::Q q = q_in;
-    const double epsilon = 0.0001;
-    while(deltaU.norm2() > epsilon) {
-        auto J = device->baseJframe(tool, state);
-        rw::math::Q deltaQ(J.e().inverse() * deltaU.e());
-        q += deltaQ;
-        device->setQ(q, state);
-        baseTtool = device->baseTframe(tool, state);
-        deltaU = calculateDeltaU(baseTtool, baseTtool_desired);
-    }
-    return q;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 rw::math::Q testIK::algorithm1(const rw::math::Transform3D<double> baseTtool_desired, const rw::math::Q q_in) {
 
@@ -172,5 +141,11 @@ rw::math::Q testIK::algorithm1(const rw::math::Transform3D<double> baseTtool_des
         baseTtool = _device->baseTframe(_toolFrame, _state);
         deltaU = calculateDeltaU(baseTtool, baseTtool_desired);
     }
+
+    if( doLogging ){
+    	logJointPosition.push_back( q_in );
+    	logJointPosition.push_back( q );
+    }
+
     return q;
 }
