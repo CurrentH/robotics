@@ -29,11 +29,14 @@ class testMarker {
 		testMarker( std::string );
 		virtual ~testMarker();
 
-		void loadMotions( std::string );
 		rw::math::Transform3D<> step();
+		void loadMotions( std::string );
+		void resetIndex();
+		bool sequenceDone();
 
 	//	Private methods
 	private:
+
 
 	//	Public attributes
 	public:

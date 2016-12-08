@@ -24,11 +24,21 @@ rw::math::Transform3D<> testMarker::step(){
 	return T1;
 }
 
+bool testMarker::sequenceDone(){
+	if( index == motions.size() ) return true;
+	return false;
+}
+
+void testMarker::resetIndex(){
+	index = 0;
+}
+
 void testMarker::loadMotions(std::string filename){
 	std::ifstream file(filename);
 	std::string word;
 
-	if( !motions.size() ){ motions.clear(); }
+	motions.clear();
+	resetIndex();
 
 	int wordCount = 0;
 

@@ -59,7 +59,6 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::Plugin
 		void ddMarker( QString );
 		void ddSequence( QString);
 
-
 	//	Private methods
 	private:
 		void setupQT();
