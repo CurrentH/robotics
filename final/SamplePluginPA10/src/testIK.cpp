@@ -149,3 +149,27 @@ rw::math::Q testIK::algorithm1(const rw::math::Transform3D<double> baseTtool_des
 
     return q;
 }
+
+void testIK::finishLog(){
+	std::ofstream statFile;
+	statFile.open("stat_file.csv");
+
+	statFile << "test" << std::endl;
+
+/*
+	for( unsigned int i = 0; i < logJointPosition.size(); i++ ){
+		for( unsigned int j = 0; j < logJointPosition[i].size(); j++ ){
+			statFile << logJointPosition[i][j] << ",";
+		}
+		for( unsigned int j = 0; j < logJointVelocity[i].size(); j++ ){
+			statFile << logJointVelocity[i][j] << ",";
+		}
+		//statFile << logToolPose[i].P() << "," << logToolPose[i].R() << ",";
+		statFile << std::endl;
+	}
+	statFile.close();
+*/
+
+}
+
+

@@ -49,6 +49,7 @@ class testIK {
 		void setToolFrame( rw::models::WorkCell::Ptr );
 		void setWorkspace( rw::models::WorkCell::Ptr wc );
 
+		void finishLog();
 		void resetPose();
 
 	//	Private methods

@@ -190,6 +190,12 @@ void SamplePlugin::timer() {
 		temp_marker->resetIndex();
 		temp_ik->resetPose();
 		updateState();
+
+
+		log().info() << "Sequency done - logging" << "\n";
+		temp_ik->finishLog();
+		log().info() << "Logging done" << "\n";
+
 	}
 	updateState();
 }
