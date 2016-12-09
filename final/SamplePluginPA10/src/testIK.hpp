@@ -21,6 +21,8 @@
 
 #include <opencv2/opencv.hpp>
 
+#include "Path.hpp"
+
 using namespace rw::common;
 using namespace rw::graphics;
 using namespace rw::kinematics;

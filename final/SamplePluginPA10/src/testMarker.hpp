@@ -20,6 +20,8 @@
 #include <rws/RobWorkStudio.hpp>
 #include <opencv2/opencv.hpp>
 
+#include "Path.hpp"
+
 #ifndef TESTMARKER_H_
 #define TESTMARKER_H_
 

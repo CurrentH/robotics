@@ -1,5 +1,7 @@
 #include "SamplePlugin.hpp"
 
+#include "Path.hpp"
+
 void SamplePlugin::setupQT(){
 	setupUi(this);
 
@@ -24,7 +26,7 @@ void SamplePlugin::setupVision(){
 }
 
 void SamplePlugin::setupHandles(){
-	_wc = WorkCellLoader::Factory::load("/home/theis/workspace/robotics/PA10WorkCell/ScenePA10RoVi1.wc.xml");
+	_wc = WorkCellLoader::Factory::load(WORKCELL_XML_PATH);
 
 	_rsHandle = getRobWorkStudio();
 	_rsHandle->stateChangedEvent().add(boost::bind(&SamplePlugin::stateChangedListener, this, _1), this);
@@ -48,12 +50,12 @@ void SamplePlugin::setupIK(){
 }
 
 void SamplePlugin::setupMarker(){
-	temp_marker = new testMarker("/home/theis/workspace/robotics/final/SamplePluginPA10/motions/MarkerMotionMedium.txt");
+	temp_marker = new testMarker(SEQUENCE_PATH);
 }
 
 void SamplePlugin::setupBackground(){
 	Image::Ptr image;
-	image = ImageLoader::Factory::load("/home/theis/workspace/robotics/final/SamplePluginPA10/backgrounds/color1.ppm");
+	image = ImageLoader::Factory::load(BACKGROUND_COLOR_PATH);
 	_bgRender->setImage(*image);
 	_rsHandle->updateAndRepaint();
 }
@@ -240,7 +242,7 @@ void SamplePlugin::btnPressed() {
 }
 
 void SamplePlugin::ddMarker( QString file ){
-	std::string path = "/home/theis/workspace/robotics/final/SamplePluginPA10/markers/";
+	std::string path = MARKER_PATH;
 	std::string _file = file.toUtf8().constData();
 	std::string temp = std::string(path) + std::string(_file);
 
@@ -252,7 +254,7 @@ void SamplePlugin::ddMarker( QString file ){
 }
 
 void SamplePlugin::ddSequence( QString file ){
-	std::string path = "/home/theis/workspace/robotics/final/SamplePluginPA10/motions/";
+	std::string path = SEQUENCE_PATH;
 	std::string _file = file.toUtf8().constData();
 	std::string temp = std::string(path) + std::string(_file);
 

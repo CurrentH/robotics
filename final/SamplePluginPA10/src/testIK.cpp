@@ -102,6 +102,11 @@ rw::math::Q testIK::bracketJointVelocity( rw::math::Q _q ){
 		}
 	}
 
+    if( doLogging ){
+    	logJointPosition.push_back( _q );
+    	logJointVelocity.push_back( q );
+    }
+
 	return q;
 }
 
@@ -142,21 +147,20 @@ rw::math::Q testIK::algorithm1(const rw::math::Transform3D<double> baseTtool_des
         deltaU = calculateDeltaU(baseTtool, baseTtool_desired);
     }
 
-    if( doLogging ){
-    	logJointPosition.push_back( q_in );
-    	logJointPosition.push_back( q );
-    }
-
     return q;
 }
 
 void testIK::finishLog(){
 	std::ofstream statFile;
-	statFile.open("stat_file.csv");
+	statFile.open(LOG_FILE_PATH);
+	//statFile.open("/home/theis/workspace/robotics/final/SamplePluginPA10/test_stat_file.csv");
 
 	statFile << "test" << std::endl;
 
-/*
+	statFile << logToolPose.size() << std::endl;
+	statFile << logJointPosition.size() << std::endl;
+	statFile << logJointVelocity.size() << std::endl;
+
 	for( unsigned int i = 0; i < logJointPosition.size(); i++ ){
 		for( unsigned int j = 0; j < logJointPosition[i].size(); j++ ){
 			statFile << logJointPosition[i][j] << ",";
@@ -164,11 +168,13 @@ void testIK::finishLog(){
 		for( unsigned int j = 0; j < logJointVelocity[i].size(); j++ ){
 			statFile << logJointVelocity[i][j] << ",";
 		}
-		//statFile << logToolPose[i].P() << "," << logToolPose[i].R() << ",";
+
+		//	todo: the rotation matrix should be outputtet as RPY instead of a 3x3.
+		statFile << logToolPose[i].P() << "," << logToolPose[i].R() << ",";
 		statFile << std::endl;
 	}
+
 	statFile.close();
-*/
 
 }
 

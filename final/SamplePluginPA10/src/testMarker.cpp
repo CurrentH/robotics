@@ -5,7 +5,7 @@
  *      Author: theis
  */
 
-#include "/home/theis/workspace/robotics/final/SamplePluginPA10/src/testMarker.hpp"
+#include "testMarker.hpp"
 
 testMarker::testMarker(std::string filename) {
 	loadMotions(filename);
