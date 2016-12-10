@@ -1,5 +1,6 @@
+#define WORKCELL_XML_PATH std::string("/home/theis/workspace/robotics/PA10WorkCell/ScenePA10RoVi1.wc.xml")
+
 #define PATH std::string("/home/theis/workspace/robotics/final/SamplePluginPA10/")
-#define WORKCELL_XML_PATH std::string("/home/theis/workspace/robotics/PA10WorkCell/PA10.pa10.xml")
 #define MARKER_PATH PATH + std::string("markers/")
 #define SEQUENCE_PATH PATH + std::string("motions/")
 #define BACKGROUND_COLOR_PATH PATH + std::string("backgrounds/")

@@ -50,12 +50,12 @@ void SamplePlugin::setupIK(){
 }
 
 void SamplePlugin::setupMarker(){
-	temp_marker = new testMarker(SEQUENCE_PATH);
+	temp_marker = new testMarker(SEQUENCE_PATH + std::string("Marker1.ppm"));
 }
 
 void SamplePlugin::setupBackground(){
 	Image::Ptr image;
-	image = ImageLoader::Factory::load(BACKGROUND_COLOR_PATH);
+	image = ImageLoader::Factory::load(BACKGROUND_COLOR_PATH + std::string("color1.ppm"));
 	_bgRender->setImage(*image);
 	_rsHandle->updateAndRepaint();
 }
