@@ -65,25 +65,33 @@ rw::math::Transform3D<> testIK::getTrueMarkerPosition(){
 }
 
 rw::math::Jacobian testIK::getJacobian(){
-	double z = 100;	//Der står vist at denne skal være 0.5m.
+	double z = 0.5;	//Der står vist at denne skal være 0.5m.
 	double f = 823;
-	double u = 0;	//double u = vision->getChangeU();
-	double v = 0; 	//double v = vision->getChangeV();
 
-	rw::math::Jacobian jacobian(2,6);
-	jacobian(0,0) = -f/z;
-	jacobian(0,1) = 0;
-	jacobian(0,2) = u/z;
-	jacobian(0,3) = (u*v)/f;
-	jacobian(0,4) = -(pow(f,2)+pow(u,2))/f;
-	jacobian(0,5) = v;
+	std::vector<double> du;	//double u = vision->getChangeU();
+	std::vector<double> dv;	//double v = vision->getChangeV();
+	int numP = dv.size();
 
-	jacobian(1,0) = 0;
-	jacobian(1,1) = -f/z;
-	jacobian(1,2) = v/z;
-	jacobian(1,3) = (pow(f,2)+pow(v,2))/f;
-	jacobian(1,4) = -(u*v)/f;
-	jacobian(1,5) = -u;
+	rw::math::Jacobian jacobian(2*numP,6);
+
+	for( uint i = 0; i < numP; i++ ){
+		double u = du[i];
+		double v = dv[i];
+
+		jacobian(2*i,0) 	= -f/z;
+		jacobian(2*i,1) 	= 0;
+		jacobian(2*i,2) 	= u/z;
+		jacobian(2*i,3) 	= (u*v)/f;
+		jacobian(2*i,4) 	= -(pow(f,2)+pow(u,2))/f;
+		jacobian(2*i,5) 	= v;
+
+		jacobian(2*i+1,0) 	= 0;
+		jacobian(2*i+1,1) 	= -f/z;
+		jacobian(2*i+1,2) 	= v/z;
+		jacobian(2*i+1,3) 	= (pow(f,2)+pow(v,2))/f;
+		jacobian(2*i+1,4) 	= -(u*v)/f;
+		jacobian(2*i+1,5) 	= -u;
+	}
 
 	return jacobian;
 }
