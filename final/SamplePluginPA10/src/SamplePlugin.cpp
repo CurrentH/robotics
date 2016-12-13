@@ -44,6 +44,7 @@ void SamplePlugin::setupIK(){
 	temp_ik->setDevice( _wc );
 	temp_ik->setToolFrame( _wc );
 	temp_ik->setWorkspace( _wc );
+	temp_ik->setMarkerFrame( _wc );
 
 	temp_ik->resetPose();
 	_rsHandle->setState(_state);
@@ -164,11 +165,10 @@ void SamplePlugin::timer() {
 		_rsHandle->setState(_state);
 
 		log().info() << "1: " << temp_ik->temp1 << "\n";
-		log().info() << "2: " << temp_ik->temp2 << "\n";
-		log().info() << "3: " << temp_ik->temp3 << "\n\n";
+		log().info() << "2: " << temp_ik->temp2 << "\n\n";
 
-		log().info() << "1: " << _deviceRobot->getQ(_defaultState) << "\n";
-		log().info() << "2: " << _deviceRobot->getQ(_state) << "\n\n";
+		log().info() << "3: " << _deviceRobot->getQ(_defaultState) << "\n";
+		log().info() << "4: " << _deviceRobot->getQ(_state) << "\n\n";
 
 		// Get the image as a RW image
 		_framegrabber->grab(_cameraFrame, _state);

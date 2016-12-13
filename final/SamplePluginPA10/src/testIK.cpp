@@ -9,6 +9,10 @@
 
 testIK::testIK( double dT ) {
 	_dT = dT;
+
+	P0 = rw::math::Vector3D<>(0.0,	0.0,	0.0);
+	P1 = rw::math::Vector3D<>(-0.1,	0.0,	0.0);
+	P2 = rw::math::Vector3D<>(0.0,	-0.1,	0.0);
 }
 
 testIK::~testIK() {
@@ -22,6 +26,14 @@ void testIK::setCurrentState( rw::kinematics::State state ){
 	_state = state;
 }
 
+void testIK::setInitialTrueGoal(){
+	//	Set the initial goal by taking it from the marker.
+}
+
+void testIK::setInitialCvGoal(){
+	//	Set the initial goal by taking it from the CV.
+}
+
 void testIK::setDevice( rw::models::WorkCell::Ptr wc ){
 	_device = wc->findDevice("PA10");
 	_maxJointVelocity = _device->getVelocityLimits();
@@ -31,18 +43,22 @@ void testIK::setToolFrame( rw::models::WorkCell::Ptr wc ){
 	_toolFrame = wc->findFrame("CameraSim");
 }
 
+void testIK::setMarkerFrame( rw::models::WorkCell::Ptr wc ){
+	_markerFrame = _wc->findFrame("Marker");
+}
+
 void testIK::resetPose(){
 	rw::math::Q pose(7, 0, -0.65, 0, 1.8, 0, 0.42, 0);
 	_device->setQ( pose, _state );
 }
 
 rw::math::Transform3D<> testIK::getMarkerTransformation(){
-	rw::kinematics::FKRange forwardKinematicRangeMarker( _device->getBase(), _wc->findFrame("Marker"), _state );
+	rw::kinematics::FKRange forwardKinematicRangeMarker( _device->getBase(), _markerFrame, _state );
 	return forwardKinematicRangeMarker.get( _state );
 }
 
 rw::math::Transform3D<> testIK::getCameraTransformation(){
-	rw::kinematics::FKRange forwardKinematicRangeCamera( _device->getBase(), _wc->findFrame("CameraSim"), _state );
+	rw::kinematics::FKRange forwardKinematicRangeCamera( _device->getBase(), _toolFrame, _state );
 	return forwardKinematicRangeCamera.get( _state );
 }
 
@@ -50,50 +66,78 @@ rw::math::Transform3D<> testIK::getTrueMarkerPosition(){
 	rw::math::Transform3D<> cameraTransformation = getCameraTransformation();
 	rw::math::Transform3D<> markerTransformation = getMarkerTransformation();
 
-	rw::math::Vector3D<> positionOffset(-0.5, 0, 0); //	We need to keep the robot 0.5m back.
+	rw::math::Vector3D<> positionOffset(-0.5, 0, 0);
 	rw::math::Vector3D<> desiredPosition = markerTransformation.P() + positionOffset;
 	rw::math::Rotation3D<> desiredRotation = cameraTransformation.R();
 	rw::math::Transform3D<> desired_transform( desiredPosition, desiredRotation);
-
-	temp1 = markerTransformation;
-	temp2 = cameraTransformation;
-	temp3 = desired_transform;
 
 	if( doLogging ){ logToolPose.push_back( cameraTransformation ); }
 
 	return desired_transform;
 }
 
-rw::math::Jacobian testIK::getJacobian(){
-	double z = 0.5;	//Der står vist at denne skal være 0.5m.
-	double f = 823;
+rw::math::Jacobian testIK::transpose( rw::math::Jacobian J){
+	rw::math::Jacobian JT(J.size2(), J.size1());
+	for( unsigned int i = 0; i < J.size1()-1; i++ ){
+		for( unsigned int j = 0; j < J.size2()-1; j++ ){
+			JT(i,j) = J(j,i);
+		}
+	}
+	return JT;
+}
 
-	std::vector<double> du;	//double u = vision->getChangeU();
-	std::vector<double> dv;	//double v = vision->getChangeV();
-	int numP = dv.size();
+rw::math::Q testIK::getTrueDeltaQ(){
+	rw::math::Transform3D<> camTmarker = inverse( _markerFrame->fTf( _toolFrame, _state ) );
 
-	rw::math::Jacobian jacobian(2*numP,6);
+	std::vector<rw::math::Vector3D<> > P;
+	P.push_back( camTmarker.R() * P0 + camTmarker.P() );
+	P.push_back( camTmarker.R() * P1 + camTmarker.P() );
+	P.push_back( camTmarker.R() * P2 + camTmarker.P() );
 
-	for( uint i = 0; i < numP; i++ ){
-		double u = du[i];
-		double v = dv[i];
-
-		jacobian(2*i,0) 	= -f/z;
-		jacobian(2*i,1) 	= 0;
-		jacobian(2*i,2) 	= u/z;
-		jacobian(2*i,3) 	= (u*v)/f;
-		jacobian(2*i,4) 	= -(pow(f,2)+pow(u,2))/f;
-		jacobian(2*i,5) 	= v;
-
-		jacobian(2*i+1,0) 	= 0;
-		jacobian(2*i+1,1) 	= -f/z;
-		jacobian(2*i+1,2) 	= v/z;
-		jacobian(2*i+1,3) 	= (pow(f,2)+pow(v,2))/f;
-		jacobian(2*i+1,4) 	= -(u*v)/f;
-		jacobian(2*i+1,5) 	= -u;
+	rw::math::Jacobian uv(numP*2,1);
+	for( unsigned int i = 0; i < numP; i++ ){
+		uv(2*i,0) 		= (P[i][0] * f) / z;
+		uv(2*i+1,0) 	= (P[i][1] * f) / z;
 	}
 
-	return jacobian;
+	rw::math::Jacobian d_uv(numP*2,1);
+	for( unsigned int i = 0; i < numP; i++ ){
+		d_uv(2*i,0)		= goal[i*2] 	-uv(i*2,0);
+		d_uv(2*i+1,0)	= goal[i*2+1]	-uv(i*2+1,0);
+	}
+
+	rw::math::Jacobian J_image(2*numP,6);
+	for( unsigned int i = 0; i < numP; i++ ){
+		double u = uv(i*2,0);
+		double v = uv(i*2+1,0);
+
+		J_image(2*i,0) 	= -f/z;
+		J_image(2*i,1) 	= 0;
+		J_image(2*i,2) 	= u/z;
+		J_image(2*i,3) 	= (u*v)/f;
+		J_image(2*i,4) 	= -(pow(f,2)+pow(u,2))/f;
+		J_image(2*i,5) 	= v;
+
+		J_image(2*i+1,0) 	= 0;
+		J_image(2*i+1,1) 	= -f/z;
+		J_image(2*i+1,2) 	= v/z;
+		J_image(2*i+1,3) 	= (pow(f,2)+pow(v,2))/f;
+		J_image(2*i+1,4) 	= -(u*v)/f;
+		J_image(2*i+1,5) 	= -u;
+	}
+
+	rw::math::Jacobian J = _device->baseJframe( _toolFrame, _state);
+
+	rw::math::Transform3D<> tmp = inverse( _device->baseTframe( _toolFrame, _state) );
+	rw::math::Jacobian S( tmp.R() );
+
+	rw::math::Jacobian Z_image = J_image * S * J;
+	rw::math::Jacobian Z_image_T = transpose( Z_image );
+
+	rw::math::Jacobian J_dq( Z_image_T.e() * d_uv.e() );
+	rw::math::Q dq( J_dq.e() );
+
+	return dq;
 }
 
 rw::math::Q testIK::bracketJointVelocity( rw::math::Q _q ){
@@ -124,6 +168,11 @@ rw::math::Q testIK::step(){
 
 	//	Get desired camera position.
 	rw::math::Transform3D<double> baseTcamera_desired = getTrueMarkerPosition();
+
+	rw::kinematics::State temp = _state;
+	temp1 = getTrueDeltaQ();
+	temp2 = algorithm1( baseTcamera_desired, q_cur );
+	_state = temp;
 
 	//	Apply algorithm 1
 	return bracketJointVelocity( algorithm1( baseTcamera_desired, q_cur ) );

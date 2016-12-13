@@ -48,8 +48,11 @@ class testIK {
 
 		void setCurrentState( rw::kinematics::State );
 		void setDevice( rw::models::WorkCell::Ptr );
+		void setInitialTrueGoal();
+		void setInitialCvGoal();
 		void setToolFrame( rw::models::WorkCell::Ptr );
-		void setWorkspace( rw::models::WorkCell::Ptr wc );
+		void setWorkspace( rw::models::WorkCell::Ptr );
+		void setMarkerFrame( rw::models::WorkCell::Ptr );
 
 		void finishLog();
 		void resetPose();
@@ -64,21 +67,23 @@ class testIK {
 		rw::math::Transform3D<> getTrueMarkerPosition();
 
 		rw::math::Q bracketJointVelocity( rw::math::Q );
-		rw::math::Jacobian getJacobian();
+		rw::math::Q getTrueDeltaQ();
+		rw::math::Q getCvDeltaQ();
+
+		rw::math::Jacobian transpose( rw::math::Jacobian );
 
 	//	Public attributes
 	public:
-		rw::math::Transform3D<> temp1;
-		rw::math::Transform3D<> temp2;
-		rw::math::Transform3D<> temp3;
-		rw::math::Q temp4;
+		rw::math::Q temp1;
+		rw::math::Q temp2;
 
 	//	Private attributes
 	private:
-		bool doLogging = true;
+		bool doLogging = false;
 
 		Device::Ptr _device;
 		Frame* _toolFrame = NULL;
+		Frame* _markerFrame = NULL;
 		rw::kinematics::State _state;
 		rw::models::WorkCell::Ptr _wc;
 
@@ -86,8 +91,17 @@ class testIK {
 		std::vector<rw::math::Q > logJointPosition;
 		std::vector<rw::math::Q > logJointVelocity;
 
+		rw::math::Pose6D<> goal{0,0,0,0,0,0};
 		rw::math::Q _maxJointVelocity;
+
+		rw::math::Vector3D<> P0;
+		rw::math::Vector3D<> P1;
+		rw::math::Vector3D<> P2;
+
 		double _dT;
+		double z = 0.5;
+		double f = 823;
+		int numP = 3;
 };
 
 #endif /* testIK_H_ */
