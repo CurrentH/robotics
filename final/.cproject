@@ -28,8 +28,8 @@
 								<option id="gnu.cpp.compiler.option.include.paths.1508592448" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/share/qt4/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/qt4"/>
-									<listOptionValue builtIn="false" value="/home/theis/workspace/robwork/RobWork/src"/>
-									<listOptionValue builtIn="false" value="/home/theis/workspace/robwork/RobWorkStudio/src"/>
+									<listOptionValue builtIn="false" value="/home/theis/workspace/RobWork/RobWork/src"/>
+									<listOptionValue builtIn="false" value="/home/theis/workspace/RobWork/RobWorkStudio/src"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.198432468" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>

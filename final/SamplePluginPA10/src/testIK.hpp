@@ -53,6 +53,7 @@ class testIK {
 		void setToolFrame( rw::models::WorkCell::Ptr );
 		void setWorkspace( rw::models::WorkCell::Ptr );
 		void setMarkerFrame( rw::models::WorkCell::Ptr );
+		void setTarget();
 
 		void finishLog();
 		void resetPose();
@@ -62,9 +63,17 @@ class testIK {
 		rw::math::VelocityScrew6D<double> calculateDeltaU(rw::math::Transform3D<double>, rw::math::Transform3D<double>);
 		rw::math::Q algorithm1(const rw::math::Transform3D<double>, const rw::math::Q);
 
+		rw::math::Transform3D<> getMarkerToCameraTransformation();
 		rw::math::Transform3D<> getMarkerTransformation();
 		rw::math::Transform3D<> getCameraTransformation();
 		rw::math::Transform3D<> getTrueMarkerPosition();
+
+		rw::math::Jacobian getUvPoints();
+		rw::math::Jacobian getDuDv( rw::math::Jacobian );
+		rw::math::Jacobian getImageJacobian( rw::math::Jacobian );
+		rw::math::Jacobian getJ();
+		rw::math::Jacobian getS();
+		rw::math::Q calculateDq( rw::math::Jacobian, rw::math::Jacobian, rw::math::Jacobian, rw::math::Jacobian );
 
 		rw::math::Q bracketJointVelocity( rw::math::Q );
 		rw::math::Q getTrueDeltaQ();
@@ -74,8 +83,7 @@ class testIK {
 
 	//	Public attributes
 	public:
-		rw::math::Q temp2;
-		std::vector<double> goal{0,0,0,0,0,0};
+
 
 	//	Private attributes
 	private:
@@ -83,7 +91,7 @@ class testIK {
 		bool doLogging = false;
 
 		Device::Ptr _device;
-		Frame* _toolFrame = NULL;
+		MovableFrame* _cameraFrame = NULL;
 		MovableFrame* _markerFrame = NULL;
 
 		rw::kinematics::State _state;
@@ -94,6 +102,8 @@ class testIK {
 		rw::math::Vector3D<> P0;
 		rw::math::Vector3D<> P1;
 		rw::math::Vector3D<> P2;
+
+		std::vector<double> target{0,0,0,0,0,0};
 
 		double _dT;
 		double z = 0.5;

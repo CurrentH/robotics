@@ -45,6 +45,7 @@ void SamplePlugin::setupIK(){
 	temp_ik->setToolFrame( _wc );
 	temp_ik->setWorkspace( _wc );
 	temp_ik->setMarkerFrame( _wc );
+	temp_ik->setTarget();
 
 	temp_ik->resetPose();
 	_rsHandle->setState(_state);
@@ -61,14 +62,12 @@ void SamplePlugin::setupBackground(){
 	_rsHandle->updateAndRepaint();
 }
 
-SamplePlugin::SamplePlugin(): RobWorkStudioPlugin("PluginUI", QIcon(":/pa_icon.png"))
-{
+SamplePlugin::SamplePlugin(): RobWorkStudioPlugin("PluginUI", QIcon(":/pa_icon.png")){
 	setupQT();
 	setupVision();
 }
 
-SamplePlugin::~SamplePlugin()
-{
+SamplePlugin::~SamplePlugin(){
 	delete _textureRender;
 	delete _bgRender;
 }
@@ -164,6 +163,9 @@ void SamplePlugin::timer() {
 		_deviceRobot->setQ(temp_ik->step(), _state);
 		_rsHandle->setState(_state);
 
+
+
+
 		// Get the image as a RW image
 		_framegrabber->grab(_cameraFrame, _state);
 		const Image& image = _framegrabber->getImage();
@@ -180,6 +182,10 @@ void SamplePlugin::timer() {
 		unsigned int maxH = 800/2;
 		_cameraView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
 		_cvView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
+
+
+
+
 	}else if( temp_marker->sequenceDone() ){
 		_timer->stop();
 
