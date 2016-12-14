@@ -93,8 +93,6 @@ rw::math::Transform3D<> testIK::getTrueMarkerPosition(){
 	rw::math::Rotation3D<> desiredRotation = cameraTransformation.R();
 	rw::math::Transform3D<> desired_transform( desiredPosition, desiredRotation);
 
-	if( doLogging ){ logToolPose.push_back( cameraTransformation ); }
-
 	return desired_transform;
 }
 
@@ -179,14 +177,14 @@ rw::math::Q testIK::calculateDq( rw::math::Jacobian _ji, rw::math::Jacobian _s, 
 
 rw::math::Q testIK::getTrueDeltaQ(){
 	rw::math::Jacobian uv = getUvPoints();
-	std::cout << "uv" << std::endl << uv << std::endl;
 	rw::math::Jacobian dudv = getDuDv( uv );
-	std::cout << "dudv" << std::endl << dudv << std::endl;
 
 	rw::math::Jacobian J_image = getImageJacobian( uv );
 	rw::math::Jacobian S = getS();
 	rw::math::Jacobian J = getJ();
 	rw::math::Q dq = calculateDq( J_image, S, J, dudv );
+
+	if( doLogging){ logTrackingError.push_back( dudv ); }
 
 	return bracketJointVelocity( dq );
 }
@@ -207,6 +205,8 @@ rw::math::Q testIK::bracketJointVelocity( rw::math::Q _dq ){
     if( doLogging ){
     	logJointPosition.push_back( _dq );
     	logJointVelocity.push_back( q );
+    	logToolPos.push_back( Vector3D<>(_device->baseTframe( _cameraFrame, _state ).P()) );
+    	logToolRPY.push_back( RPY<>(_device->baseTframe( _cameraFrame, _state ).R()) );
     }
 
 	return q;
@@ -254,31 +254,28 @@ rw::math::Q testIK::algorithm1(const rw::math::Transform3D<double> baseTtool_des
 }
 
 void testIK::finishLog(){
+	std::cout << "Start logging" << std::endl;
 	std::ofstream statFile;
 	statFile.open(LOG_FILE_PATH);
-	//statFile.open("/home/theis/workspace/robotics/final/SamplePluginPA10/test_stat_file.csv");
 
-	statFile << "test" << std::endl;
+	std::cout << logToolPos.size() << "\t";
+	std::cout << logToolRPY.size() << "\t";
+	std::cout << logJointPosition.size() << "\t";
+	std::cout << logJointVelocity.size() << "\t";
+	std::cout << logTrackingError.size() << std::endl;
 
-	statFile << logToolPose.size() << std::endl;
-	statFile << logJointPosition.size() << std::endl;
-	statFile << logJointVelocity.size() << std::endl;
+	std::cout << logTrackingError[1].size1() << " " << logTrackingError[1].size2() << std::endl;
 
 	for( unsigned int i = 0; i < logJointPosition.size(); i++ ){
-		for( unsigned int j = 0; j < logJointPosition[i].size(); j++ ){
-			statFile << logJointPosition[i][j] << ",";
-		}
-		for( unsigned int j = 0; j < logJointVelocity[i].size(); j++ ){
-			statFile << logJointVelocity[i][j] << ",";
-		}
-
-		//	todo: the rotation matrix should be outputtet as RPY instead of a 3x3.
-		statFile << logToolPose[i].P() << "," << logToolPose[i].R() << ",";
-		statFile << std::endl;
+			statFile << logToolPos[i] << ",";
+			statFile << logToolRPY[i] << ",";
+			statFile << logJointPosition[i] << ",";
+			statFile << logJointVelocity[i] << ",";
+			statFile << logTrackingError[i] << ",";
 	}
 
 	statFile.close();
-
+	std::cout << "Logging done" << std::endl;
 }
 
 /*

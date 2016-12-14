@@ -39,7 +39,7 @@ void SamplePlugin::setupHandles(){
 }
 
 void SamplePlugin::setupIK(){
-	temp_ik = new testIK( 0.5 ); //todo: define global dT?
+	temp_ik = new testIK( 0.1 ); //todo: define global dT?
 	temp_ik->setCurrentState( _state );
 	temp_ik->setDevice( _wc );
 	temp_ik->setToolFrame( _wc );
@@ -164,8 +164,6 @@ void SamplePlugin::timer() {
 		_rsHandle->setState(_state);
 
 
-
-
 		// Get the image as a RW image
 		_framegrabber->grab(_cameraFrame, _state);
 		const Image& image = _framegrabber->getImage();
@@ -184,19 +182,12 @@ void SamplePlugin::timer() {
 		_cvView->setPixmap(p.scaled(maxW,maxH,Qt::KeepAspectRatio));
 
 
-
-
 	}else if( temp_marker->sequenceDone() ){
 		_timer->stop();
-
+		_state = _defaultState;
 		temp_marker->resetIndex();
 		temp_ik->resetPose();
-		updateState();
-
-		log().info() << "Sequency done - logging" << "\n";
 		temp_ik->finishLog();
-		log().info() << "Logging done" << "\n";
-
 	}
 	updateState();
 }
@@ -234,6 +225,7 @@ void SamplePlugin::btnPressed() {
 	}
 	else if(obj==_btnRestart){
 		log().info() << "Restart\n";
+		_state = _defaultState;
 		temp_marker->resetIndex();
 		temp_ik->resetPose();
 		updateState();

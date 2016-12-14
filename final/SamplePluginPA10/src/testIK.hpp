@@ -88,7 +88,7 @@ class testIK {
 	//	Private attributes
 	private:
 		bool initialRun = true;
-		bool doLogging = false;
+		bool doLogging = true;
 
 		Device::Ptr _device;
 		MovableFrame* _cameraFrame = NULL;
@@ -111,9 +111,11 @@ class testIK {
 
 		unsigned int numP = 3;
 
-		std::vector<rw::math::Transform3D<> > logToolPose;
+		std::vector<rw::math::Vector3D<> > logToolPos;
+		std::vector<rw::math::RPY<> > logToolRPY;
 		std::vector<rw::math::Q > logJointPosition;
 		std::vector<rw::math::Q > logJointVelocity;
+		std::vector<rw::math::Jacobian> logTrackingError;
 };
 
 #endif /* testIK_H_ */
