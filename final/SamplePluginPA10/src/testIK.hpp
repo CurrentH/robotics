@@ -74,24 +74,21 @@ class testIK {
 
 	//	Public attributes
 	public:
-		rw::math::Q temp1;
 		rw::math::Q temp2;
+		std::vector<double> goal{0,0,0,0,0,0};
 
 	//	Private attributes
 	private:
+		bool initialRun = true;
 		bool doLogging = false;
 
 		Device::Ptr _device;
 		Frame* _toolFrame = NULL;
-		Frame* _markerFrame = NULL;
+		MovableFrame* _markerFrame = NULL;
+
 		rw::kinematics::State _state;
 		rw::models::WorkCell::Ptr _wc;
 
-		std::vector<rw::math::Transform3D<> > logToolPose;
-		std::vector<rw::math::Q > logJointPosition;
-		std::vector<rw::math::Q > logJointVelocity;
-
-		rw::math::Pose6D<> goal{0,0,0,0,0,0};
 		rw::math::Q _maxJointVelocity;
 
 		rw::math::Vector3D<> P0;
@@ -101,7 +98,12 @@ class testIK {
 		double _dT;
 		double z = 0.5;
 		double f = 823;
-		int numP = 3;
+
+		unsigned int numP = 3;
+
+		std::vector<rw::math::Transform3D<> > logToolPose;
+		std::vector<rw::math::Q > logJointPosition;
+		std::vector<rw::math::Q > logJointVelocity;
 };
 
 #endif /* testIK_H_ */

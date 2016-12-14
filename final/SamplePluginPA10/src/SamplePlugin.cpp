@@ -39,7 +39,7 @@ void SamplePlugin::setupHandles(){
 }
 
 void SamplePlugin::setupIK(){
-	temp_ik = new testIK( 0.1 ); //todo: define global dT?
+	temp_ik = new testIK( 0.5 ); //todo: define global dT?
 	temp_ik->setCurrentState( _state );
 	temp_ik->setDevice( _wc );
 	temp_ik->setToolFrame( _wc );
@@ -164,12 +164,6 @@ void SamplePlugin::timer() {
 		_deviceRobot->setQ(temp_ik->step(), _state);
 		_rsHandle->setState(_state);
 
-		log().info() << "1: " << temp_ik->temp1 << "\n";
-		log().info() << "2: " << temp_ik->temp2 << "\n\n";
-
-		log().info() << "3: " << _deviceRobot->getQ(_defaultState) << "\n";
-		log().info() << "4: " << _deviceRobot->getQ(_state) << "\n\n";
-
 		// Get the image as a RW image
 		_framegrabber->grab(_cameraFrame, _state);
 		const Image& image = _framegrabber->getImage();
@@ -192,7 +186,6 @@ void SamplePlugin::timer() {
 		temp_marker->resetIndex();
 		temp_ik->resetPose();
 		updateState();
-
 
 		log().info() << "Sequency done - logging" << "\n";
 		temp_ik->finishLog();
