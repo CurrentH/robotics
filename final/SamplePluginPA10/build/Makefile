@@ -258,6 +258,33 @@ src/testMarker.cpp.s:
 	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.s
 .PHONY : src/testMarker.cpp.s
 
+src/vision.o: src/vision.cpp.o
+
+.PHONY : src/vision.o
+
+# target to build an object file
+src/vision.cpp.o:
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/vision.cpp.o
+.PHONY : src/vision.cpp.o
+
+src/vision.i: src/vision.cpp.i
+
+.PHONY : src/vision.i
+
+# target to preprocess a source file
+src/vision.cpp.i:
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/vision.cpp.i
+.PHONY : src/vision.cpp.i
+
+src/vision.s: src/vision.cpp.s
+
+.PHONY : src/vision.s
+
+# target to generate assembly for a file
+src/vision.cpp.s:
+	$(MAKE) -f CMakeFiles/SamplePlugin.dir/build.make CMakeFiles/SamplePlugin.dir/src/vision.cpp.s
+.PHONY : src/vision.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,6 +309,9 @@ help:
 	@echo "... src/testMarker.o"
 	@echo "... src/testMarker.i"
 	@echo "... src/testMarker.s"
+	@echo "... src/vision.o"
+	@echo "... src/vision.i"
+	@echo "... src/vision.s"
 .PHONY : help
 
 

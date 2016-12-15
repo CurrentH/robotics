@@ -30,6 +30,8 @@
 									<listOptionValue builtIn="false" value="/usr/include/qt4"/>
 									<listOptionValue builtIn="false" value="/home/theis/workspace/RobWork/RobWork/src"/>
 									<listOptionValue builtIn="false" value="/home/theis/workspace/RobWork/RobWorkStudio/src"/>
+									<listOptionValue builtIn="false" value="/home/theis/workspace/robwork/RobWork/src"/>
+									<listOptionValue builtIn="false" value="/home/theis/workspace/robwork/RobWorkStudio/src"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.198432468" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>

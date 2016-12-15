@@ -22,6 +22,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "Path.hpp"
+#include "vision.hpp"
 
 using namespace rw::common;
 using namespace rw::graphics;
@@ -46,13 +47,15 @@ class testIK {
 		virtual ~testIK();
 		rw::math::Q step();
 
+		cv::Mat getCameraView();
+		cv::Mat getCvView();
+
 		void setCurrentState( rw::kinematics::State );
 		void setDevice( rw::models::WorkCell::Ptr );
-		void setInitialTrueGoal();
-		void setInitialCvGoal();
 		void setToolFrame( rw::models::WorkCell::Ptr );
 		void setWorkspace( rw::models::WorkCell::Ptr );
 		void setMarkerFrame( rw::models::WorkCell::Ptr );
+		void setFrameGrabber( rwlibs::simulation::GLFrameGrabber* );
 		void setTarget();
 
 		void finishLog();
@@ -60,15 +63,13 @@ class testIK {
 
 	//	Private methods
 	private:
-		rw::math::VelocityScrew6D<double> calculateDeltaU(rw::math::Transform3D<double>, rw::math::Transform3D<double>);
-		rw::math::Q algorithm1(const rw::math::Transform3D<double>, const rw::math::Q);
+		cv::Mat getImageFrameGrabber();
+		static cv::Mat toOpenCVImage(const rw::sensor::Image&);
 
 		rw::math::Transform3D<> getMarkerToCameraTransformation();
-		rw::math::Transform3D<> getMarkerTransformation();
-		rw::math::Transform3D<> getCameraTransformation();
-		rw::math::Transform3D<> getTrueMarkerPosition();
 
-		rw::math::Jacobian getUvPoints();
+		rw::math::Jacobian getUvPointsCV();
+		rw::math::Jacobian getUvPointsNoCV();
 		rw::math::Jacobian getDuDv( rw::math::Jacobian );
 		rw::math::Jacobian getImageJacobian( rw::math::Jacobian );
 		rw::math::Jacobian getJ();
@@ -76,8 +77,7 @@ class testIK {
 		rw::math::Q calculateDq( rw::math::Jacobian, rw::math::Jacobian, rw::math::Jacobian, rw::math::Jacobian );
 
 		rw::math::Q bracketJointVelocity( rw::math::Q );
-		rw::math::Q getTrueDeltaQ();
-		rw::math::Q getCvDeltaQ();
+		rw::math::Q getDeltaQ( rw::math::Jacobian );
 
 		rw::math::Jacobian transpose( rw::math::Jacobian );
 
@@ -87,12 +87,16 @@ class testIK {
 
 	//	Private attributes
 	private:
+		bool useCV = true;
 		bool initialRun = true;
 		bool doLogging = true;
+
+		Vision* _vision = NULL;
 
 		Device::Ptr _device;
 		MovableFrame* _cameraFrame = NULL;
 		MovableFrame* _markerFrame = NULL;
+		rwlibs::simulation::GLFrameGrabber* _frameGrabber = NULL;
 
 		rw::kinematics::State _state;
 		rw::models::WorkCell::Ptr _wc;
@@ -116,6 +120,7 @@ class testIK {
 		std::vector<rw::math::Q > logJointPosition;
 		std::vector<rw::math::Q > logJointVelocity;
 		std::vector<rw::math::Jacobian> logTrackingError;
+
 };
 
 #endif /* testIK_H_ */

@@ -69,8 +69,7 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::Plugin
 		void setupBackground();
 
 		void updateState();
-
-		static cv::Mat toOpenCVImage(const rw::sensor::Image& img);
+		void updateQTimage();
 
 	//	Public attributes
 	public:

@@ -18,6 +18,7 @@ void SamplePlugin::setupQT(){
 }
 
 void SamplePlugin::setupVision(){
+	vision = new Vision;
 	Image textureImage(300,300,Image::GRAY,Image::Depth8U);
 	_textureRender = new RenderImage(textureImage);
 	Image bgImage(0,0,Image::GRAY,Image::Depth8U);
@@ -39,13 +40,12 @@ void SamplePlugin::setupHandles(){
 }
 
 void SamplePlugin::setupIK(){
-	temp_ik = new testIK( 1 ); //todo: define global dT?
+	temp_ik = new testIK( 0.1 ); //todo: define global dT?
 	temp_ik->setCurrentState( _state );
 	temp_ik->setDevice( _wc );
 	temp_ik->setToolFrame( _wc );
 	temp_ik->setWorkspace( _wc );
 	temp_ik->setMarkerFrame( _wc );
-
 
 	temp_ik->resetPose();
 	_rsHandle->setState(_state);
@@ -62,12 +62,14 @@ void SamplePlugin::setupBackground(){
 	_rsHandle->updateAndRepaint();
 }
 
-SamplePlugin::SamplePlugin(): RobWorkStudioPlugin("PluginUI", QIcon(":/pa_icon.png")){
+SamplePlugin::SamplePlugin(): RobWorkStudioPlugin("PluginUI", QIcon(":/pa_icon.png"))
+{
 	setupQT();
 	setupVision();
 }
 
-SamplePlugin::~SamplePlugin(){
+SamplePlugin::~SamplePlugin()
+{
 	delete _textureRender;
 	delete _bgRender;
 }
@@ -115,9 +117,6 @@ void SamplePlugin::open(WorkCell* workcell)
 				_framegrabber = new GLFrameGrabber(width,height,fovy);
 				SceneViewer::Ptr gldrawer = _rsHandle->getView()->getSceneViewer();
 				_framegrabber->init(gldrawer);
-
-				temp_ik->setFrameGrabber( _framegrabber );
-				temp_ik->setTarget();
 			}
 		}
 	}
@@ -165,30 +164,68 @@ void SamplePlugin::timer() {
 		_frameMarker->setTransform(temp_marker->step(), _state);
 		_deviceRobot->setQ(temp_ik->step(), _state);
 		_rsHandle->setState(_state);
-		updateQTimage();
+
+		log().info() << "1: " << temp_ik->temp1 << "\n";
+		log().info() << "2: " << temp_ik->temp2 << "\n\n";
+
+		log().info() << "3: " << _deviceRobot->getQ(_defaultState) << "\n";
+		log().info() << "4: " << _deviceRobot->getQ(_state) << "\n\n";
+
+		// Get the image as a RW image
+		_framegrabber->grab(_cameraFrame, _state);
+		const Image& image = _framegrabber->getImage();
+
+		// Convert to OpenCV image
+		Mat im = toOpenCVImage(image);
+		Mat imflip;
+		cv::flip(im, imflip, 0);
+
+		////////////
+		// Vision //
+		////////////
+
+		cv::Mat img = imflip.clone();
+
+		std::vector<rw::math::Vector3D<> > points;
+
+		if (true) points = vision->stepColor(img);
+		//else points = vision->stepSift(imflip);
+
+		for (int i = 0; i < points.size(); i++) std::cout << points[i] << std::endl;
+
+		for (int i = 0; i < points.size(); i++){
+			cv::Point center(std::round(points[i][0]), std::round(points[i][1]));
+			int radius = std::round(points[i][2]);
+			cv::circle(img, center, radius, cv::Scalar(0, 0, 0), 20);
+			std::cout << i << std::endl;
+		}
+
+		////////////
+		//        //
+		////////////
+
+		// Show in QLabel
+		QImage img1(imflip.data, imflip.cols, imflip.rows, imflip.step, QImage::Format_RGB888);
+		QImage img2(img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
+		QPixmap p1 = QPixmap::fromImage(img1);
+		QPixmap p2 = QPixmap::fromImage(img2);
+		unsigned int maxW = 400/2;
+		unsigned int maxH = 800/2;
+		_cameraView->setPixmap(p1.scaled(maxW,maxH,Qt::KeepAspectRatio));
+		_cvView->setPixmap(p2.scaled(maxW,maxH,Qt::KeepAspectRatio));
 	}else if( temp_marker->sequenceDone() ){
 		_timer->stop();
-		_state = _defaultState;
+
 		temp_marker->resetIndex();
 		temp_ik->resetPose();
+		updateState();
+
+		log().info() << "Sequency done - logging" << "\n";
 		temp_ik->finishLog();
+		log().info() << "Logging done" << "\n";
+
 	}
 	updateState();
-}
-
-void SamplePlugin::updateQTimage(){
-	unsigned int maxW = 400/2;
-	unsigned int maxH = 800/2;
-
-	cv::Mat imgCam = temp_ik->getCameraView();
-	QImage qImgCam(imgCam.data, imgCam.cols, imgCam.rows, imgCam.step, QImage::Format_RGB888);
-	QPixmap pImgCam = QPixmap::fromImage(qImgCam);
-	_cameraView->setPixmap(pImgCam.scaled(maxW,maxH,Qt::KeepAspectRatio));
-
-	cv::Mat imgCv = temp_ik->getCvView();
-	QImage qImgCv(imgCv.data, imgCv.cols, imgCv.rows, imgCv.step, QImage::Format_RGB888);
-	QPixmap pImgCv = QPixmap::fromImage(qImgCv);
-	_cvView->setPixmap(pImgCv.scaled(maxW,maxH,Qt::KeepAspectRatio));
 }
 
 void SamplePlugin::updateState(){
@@ -199,12 +236,18 @@ void SamplePlugin::stateChangedListener(const State& state) {
 	_state = state;
 }
 
+Mat SamplePlugin::toOpenCVImage(const Image& img) {
+	Mat res(img.getHeight(), img.getWidth(), CV_8UC3);
+	res.data = (uchar*)img.getImageData();
+	return res;
+}
+
 void SamplePlugin::btnPressed() {
 	QObject *obj = sender();
 	if(obj==_btnStart){
 		log().info() << "Start\n";
 		if(!_timer->isActive()){
-			_timer->start(500);
+			_timer->start(100);
 			log().info() << "\t - Timer on\n";
 		}
 	}
@@ -218,7 +261,6 @@ void SamplePlugin::btnPressed() {
 	}
 	else if(obj==_btnRestart){
 		log().info() << "Restart\n";
-		_state = _defaultState;
 		temp_marker->resetIndex();
 		temp_ik->resetPose();
 		updateState();
@@ -249,9 +291,3 @@ void SamplePlugin::ddSequence( QString file ){
 
 
 Q_EXPORT_PLUGIN(SamplePlugin);
-
-
-
-
-
-
