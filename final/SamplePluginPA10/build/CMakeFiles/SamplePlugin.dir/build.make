@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/stagsted/workspace/robotics/final/SamplePluginPA10
+CMAKE_SOURCE_DIR = /home/theis/workspace/robotics/final/SamplePluginPA10
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/stagsted/workspace/robotics/final/SamplePluginPA10/build
+CMAKE_BINARY_DIR = /home/theis/workspace/robotics/final/SamplePluginPA10/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SamplePlugin.dir/depend.make
@@ -58,32 +58,32 @@ include CMakeFiles/SamplePlugin.dir/progress.make
 include CMakeFiles/SamplePlugin.dir/flags.make
 
 ui_SamplePlugin.h: ../src/SamplePlugin.ui
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ui_SamplePlugin.h"
-	/usr/lib/x86_64-linux-gnu/qt4/bin/uic -o /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/ui_SamplePlugin.h /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.ui
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ui_SamplePlugin.h"
+	/usr/lib/x86_64-linux-gnu/qt4/bin/uic -o /home/theis/workspace/robotics/final/SamplePluginPA10/build/ui_SamplePlugin.h /home/theis/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.ui
 
 src/moc_SamplePlugin.cxx: ../src/SamplePlugin.hpp
 src/moc_SamplePlugin.cxx: src/moc_SamplePlugin.cxx_parameters
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating src/moc_SamplePlugin.cxx"
-	cd /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/src && /usr/lib/x86_64-linux-gnu/qt4/bin/moc @/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx_parameters
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating src/moc_SamplePlugin.cxx"
+	cd /home/theis/workspace/robotics/final/SamplePluginPA10/build/src && /usr/lib/x86_64-linux-gnu/qt4/bin/moc @/home/theis/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx_parameters
 
 qrc_resources.cxx: ../src/pa_icon.png
 qrc_resources.cxx: src/resources.qrc.depends
 qrc_resources.cxx: ../src/resources.qrc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating qrc_resources.cxx"
-	/usr/lib/x86_64-linux-gnu/qt4/bin/rcc -name resources -o /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/resources.qrc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating qrc_resources.cxx"
+	/usr/lib/x86_64-linux-gnu/qt4/bin/rcc -name resources -o /home/theis/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx /home/theis/workspace/robotics/final/SamplePluginPA10/src/resources.qrc
 
 CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o: CMakeFiles/SamplePlugin.dir/flags.make
 CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o: ../src/SamplePlugin.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o -c /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.cpp
 
 CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.cpp > CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/theis/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.cpp > CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.i
 
 CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.cpp -o CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/theis/workspace/robotics/final/SamplePluginPA10/src/SamplePlugin.cpp -o CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.s
 
 CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o.requires:
 
@@ -98,16 +98,16 @@ CMakeFiles/SamplePlugin.dir/src/SamplePlugin.cpp.o.provides.build: CMakeFiles/Sa
 
 CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o: CMakeFiles/SamplePlugin.dir/flags.make
 CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o: ../src/testMarker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o -c /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/testMarker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/src/testMarker.cpp
 
 CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/testMarker.cpp > CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/theis/workspace/robotics/final/SamplePluginPA10/src/testMarker.cpp > CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.i
 
 CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/testMarker.cpp -o CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/theis/workspace/robotics/final/SamplePluginPA10/src/testMarker.cpp -o CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.s
 
 CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o.requires:
 
@@ -122,16 +122,16 @@ CMakeFiles/SamplePlugin.dir/src/testMarker.cpp.o.provides.build: CMakeFiles/Samp
 
 CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o: CMakeFiles/SamplePlugin.dir/flags.make
 CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o: ../src/testIK.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o -c /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp
 
 CMakeFiles/SamplePlugin.dir/src/testIK.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SamplePlugin.dir/src/testIK.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp > CMakeFiles/SamplePlugin.dir/src/testIK.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/theis/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp > CMakeFiles/SamplePlugin.dir/src/testIK.cpp.i
 
 CMakeFiles/SamplePlugin.dir/src/testIK.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SamplePlugin.dir/src/testIK.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp -o CMakeFiles/SamplePlugin.dir/src/testIK.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/theis/workspace/robotics/final/SamplePluginPA10/src/testIK.cpp -o CMakeFiles/SamplePlugin.dir/src/testIK.cpp.s
 
 CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.requires:
 
@@ -146,16 +146,16 @@ CMakeFiles/SamplePlugin.dir/src/testIK.cpp.o.provides.build: CMakeFiles/SamplePl
 
 CMakeFiles/SamplePlugin.dir/src/vision.cpp.o: CMakeFiles/SamplePlugin.dir/flags.make
 CMakeFiles/SamplePlugin.dir/src/vision.cpp.o: ../src/vision.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SamplePlugin.dir/src/vision.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/vision.cpp.o -c /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/vision.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SamplePlugin.dir/src/vision.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/vision.cpp.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/src/vision.cpp
 
 CMakeFiles/SamplePlugin.dir/src/vision.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SamplePlugin.dir/src/vision.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/vision.cpp > CMakeFiles/SamplePlugin.dir/src/vision.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/theis/workspace/robotics/final/SamplePluginPA10/src/vision.cpp > CMakeFiles/SamplePlugin.dir/src/vision.cpp.i
 
 CMakeFiles/SamplePlugin.dir/src/vision.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SamplePlugin.dir/src/vision.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stagsted/workspace/robotics/final/SamplePluginPA10/src/vision.cpp -o CMakeFiles/SamplePlugin.dir/src/vision.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/theis/workspace/robotics/final/SamplePluginPA10/src/vision.cpp -o CMakeFiles/SamplePlugin.dir/src/vision.cpp.s
 
 CMakeFiles/SamplePlugin.dir/src/vision.cpp.o.requires:
 
@@ -170,16 +170,16 @@ CMakeFiles/SamplePlugin.dir/src/vision.cpp.o.provides.build: CMakeFiles/SamplePl
 
 CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o: CMakeFiles/SamplePlugin.dir/flags.make
 CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o: src/moc_SamplePlugin.cxx
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o -c /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx
 
 CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx > CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/theis/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx > CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.i
 
 CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx -o CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/theis/workspace/robotics/final/SamplePluginPA10/build/src/moc_SamplePlugin.cxx -o CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.s
 
 CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o.requires:
 
@@ -194,16 +194,16 @@ CMakeFiles/SamplePlugin.dir/src/moc_SamplePlugin.cxx.o.provides.build: CMakeFile
 
 CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o: CMakeFiles/SamplePlugin.dir/flags.make
 CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o: qrc_resources.cxx
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o -c /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx
 
 CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx > CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/theis/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx > CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.i
 
 CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx -o CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/theis/workspace/robotics/final/SamplePluginPA10/build/qrc_resources.cxx -o CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.s
 
 CMakeFiles/SamplePlugin.dir/qrc_resources.cxx.o.requires:
 
@@ -242,25 +242,25 @@ SamplePlugin_EXTERNAL_OBJECTS =
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libopencv_ocl.so.2.4.9
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libopencv_gpu.so.2.4.9
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libopencv_contrib.so.2.4.9
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_lua_s.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/liblua51.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_algorithms.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_pathplanners.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_pathoptimization.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_simulation.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_opengl.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_assembly.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_task.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_calibration.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_csg.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_proximitystrategies.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/libyaobi.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/libpqp.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_lua_s.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/liblua51.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_algorithms.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_pathplanners.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_pathoptimization.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_simulation.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_opengl.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_assembly.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_task.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_calibration.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_csg.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_proximitystrategies.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/libyaobi.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/libpqp.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libGLU.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libGL.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libxerces-c.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_assimp.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_assimp.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
@@ -273,30 +273,30 @@ SamplePlugin_EXTERNAL_OBJECTS =
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libpthread.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_test_exec_monitor.a
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_qhull.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_csgjs.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_unzip.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_qhull.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_csgjs.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_unzip.a
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libz.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libdl.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_lua_s.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/liblua51.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_algorithms.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_pathplanners.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_pathoptimization.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_simulation.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_opengl.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_assembly.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_task.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_calibration.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_csg.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_proximitystrategies.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/libyaobi.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/libpqp.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_lua_s.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/liblua51.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_algorithms.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_pathplanners.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_pathoptimization.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_simulation.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_opengl.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_assembly.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_task.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_calibration.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_csg.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_proximitystrategies.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/libyaobi.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/libpqp.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libGLU.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libGL.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libxerces-c.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_assimp.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_assimp.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
@@ -309,9 +309,9 @@ SamplePlugin_EXTERNAL_OBJECTS =
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libpthread.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_test_exec_monitor.a
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_qhull.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_csgjs.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_unzip.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_qhull.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_csgjs.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_unzip.a
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libz.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libdl.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libQtOpenGL.so
@@ -333,23 +333,23 @@ SamplePlugin_EXTERNAL_OBJECTS =
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.2.4.9
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libopencv_flann.so.2.4.9
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libopencv_core.so.2.4.9
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_lua_s.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/liblua51.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_algorithms.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_pathplanners.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_pathoptimization.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_simulation.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_opengl.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_assembly.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_task.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_calibration.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_csg.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_proximitystrategies.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/libyaobi.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/libpqp.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_lua_s.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/liblua51.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_algorithms.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_pathplanners.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_pathoptimization.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_simulation.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_opengl.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_assembly.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_task.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_calibration.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_csg.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_proximitystrategies.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/libyaobi.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/libpqp.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libxerces-c.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_assimp.so
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_assimp.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
@@ -361,9 +361,9 @@ SamplePlugin_EXTERNAL_OBJECTS =
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libpthread.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_test_exec_monitor.a
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_qhull.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_csgjs.a
-../libs/release/libSamplePlugin.so: /home/stagsted/RobWork/RobWork/cmake/../libs/release/librw_unzip.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_qhull.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_csgjs.a
+../libs/release/libSamplePlugin.so: /home/theis/workspace/RobWork/RobWork/cmake/../libs/release/librw_unzip.a
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libz.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libdl.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libQtOpenGL.so
@@ -372,7 +372,7 @@ SamplePlugin_EXTERNAL_OBJECTS =
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libQtGui.so
 ../libs/release/libSamplePlugin.so: /usr/lib/x86_64-linux-gnu/libQtCore.so
 ../libs/release/libSamplePlugin.so: CMakeFiles/SamplePlugin.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX shared module ../libs/release/libSamplePlugin.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX shared module ../libs/release/libSamplePlugin.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SamplePlugin.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -396,6 +396,6 @@ CMakeFiles/SamplePlugin.dir/clean:
 CMakeFiles/SamplePlugin.dir/depend: ui_SamplePlugin.h
 CMakeFiles/SamplePlugin.dir/depend: src/moc_SamplePlugin.cxx
 CMakeFiles/SamplePlugin.dir/depend: qrc_resources.cxx
-	cd /home/stagsted/workspace/robotics/final/SamplePluginPA10/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stagsted/workspace/robotics/final/SamplePluginPA10 /home/stagsted/workspace/robotics/final/SamplePluginPA10 /home/stagsted/workspace/robotics/final/SamplePluginPA10/build /home/stagsted/workspace/robotics/final/SamplePluginPA10/build /home/stagsted/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/SamplePlugin.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/theis/workspace/robotics/final/SamplePluginPA10/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/theis/workspace/robotics/final/SamplePluginPA10 /home/theis/workspace/robotics/final/SamplePluginPA10 /home/theis/workspace/robotics/final/SamplePluginPA10/build /home/theis/workspace/robotics/final/SamplePluginPA10/build /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/SamplePlugin.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/SamplePlugin.dir/depend
 

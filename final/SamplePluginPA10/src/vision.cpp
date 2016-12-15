@@ -48,8 +48,9 @@ cv::Mat Vision::getCvImage(){
 	return imgCv;
 }
 
-void Vision::initColor(cv::Mat image){
-	points = stepColor(image);
+std::vector<rw::math::Vector3D<> > Vision::initColor(cv::Mat image){
+	points = getPoints(image);
+	return points;
 }
 
 double Vision::dist(rw::math::Vector3D<> p1, rw::math::Vector3D<> p2){
@@ -76,7 +77,7 @@ std::vector<rw::math::Vector3D<> > Vision::orderPoints(std::vector<rw::math::Vec
 	return result;
 }
 
-std::vector<rw::math::Vector3D<> > Vision::stepColor(cv::Mat image){
+std::vector<rw::math::Vector3D<> > Vision::getPoints(cv::Mat image){
 	imgCv = image.clone();
 	std::vector<cv::Vec3f> circles;
 	circleDetection(imgCv, circles);
@@ -88,5 +89,9 @@ std::vector<rw::math::Vector3D<> > Vision::stepColor(cv::Mat image){
 		cv::circle(imgCv, center, radius, cv::Scalar(0, 0, 0), 20);
 	}
 
-	return orderPoints(result);
+	return result;
+}
+
+std::vector<rw::math::Vector3D<> > Vision::stepColor(cv::Mat image){
+	return orderPoints(getPoints( image ));
 }

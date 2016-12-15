@@ -56,10 +56,17 @@ void testIK::setFrameGrabber( rwlibs::simulation::GLFrameGrabber *frameGrabber )
 void testIK::setTarget(){
 	rw::math::Jacobian uv(2*numP,1);
 	if( useCV ){
-		std::vector<rw::math::Vector3D<> > P = _vision->stepColor( getCameraView() );
+		std::cout << "test1" << std::endl;
+		std::vector<rw::math::Vector3D<> > P = _vision->initColor( getCameraView() );
+		std::cout << P.size() << std::endl;
+		std::cout << P[0] << std::endl;
+		std::cout << P[1] << std::endl;
+		std::cout << P[2] << std::endl;
 		for( unsigned int i = 0; i < numP; i++ ){
 			uv(i*2,0) 	= P[i][0];
 			uv(i*2+1,0) = P[i][1];
+
+			std::cout << "test2"<< std::endl;
 		}
 	}else{
 		uv = getUvPointsNoCV();

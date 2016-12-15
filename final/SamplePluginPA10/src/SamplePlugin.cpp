@@ -87,9 +87,10 @@ void SamplePlugin::initialize() {
 void SamplePlugin::open(WorkCell* workcell)
 {
 	log().info() << "OPEN: " << workcell->getFilename() << "\n";
-
 	if (_wc != NULL) {
 		// Add the texture render to this workcell if there is a frame for texture
+
+
 		Frame* textureFrame = _wc->findFrame("MarkerTexture");
 		if (textureFrame != NULL) {
 			_rsHandle->getWorkCellScene()->addRender("TextureImage",_textureRender,textureFrame);
@@ -115,12 +116,12 @@ void SamplePlugin::open(WorkCell* workcell)
 				_framegrabber = new GLFrameGrabber(width,height,fovy);
 				SceneViewer::Ptr gldrawer = _rsHandle->getView()->getSceneViewer();
 				_framegrabber->init(gldrawer);
-
 				temp_ik->setFrameGrabber( _framegrabber );
 				temp_ik->setTarget();
 			}
 		}
 	}
+
 }
 
 void SamplePlugin::close() {
