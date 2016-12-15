@@ -52,6 +52,10 @@ void Vision::initColor(cv::Mat image){
 	points = stepColor(image);
 }
 
+double Vision::dist(rw::math::Vector3D<> p1, rw::math::Vector3D<> p2){
+	return sqrt(pow(p1[0] - p2[0], 2) + pow(p1[1] - p2[1], 2));
+}
+
 rw::math::Vector3D<> Vision::nearest(rw::math::Vector3D<> point, std::vector<rw::math::Vector3D<> > vect){
 	int min = dist(point, vect[0]);
 	int index = 0;
@@ -61,13 +65,13 @@ rw::math::Vector3D<> Vision::nearest(rw::math::Vector3D<> point, std::vector<rw:
 			index = i;
 		}
 	}
-	return vect[i];
+	return vect[index];
 }
 
 std::vector<rw::math::Vector3D<> > Vision::orderPoints(std::vector<rw::math::Vector3D<> > newPoints){
 	std::vector<rw::math::Vector3D<> > result;
 	for (int i = 0; i < points.size(); i++){
-		result.push_back(nearest(point[i], newPoints));
+		result.push_back(nearest(points[i], newPoints));
 	}
 	return result;
 }
@@ -84,5 +88,5 @@ std::vector<rw::math::Vector3D<> > Vision::stepColor(cv::Mat image){
 		cv::circle(imgCv, center, radius, cv::Scalar(0, 0, 0), 20);
 	}
 
-	return orderPoints();
+	return orderPoints(result);
 }

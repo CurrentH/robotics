@@ -22,12 +22,15 @@ class Vision{
 public:
 	Vision();
 
+	void initColor(cv::Mat image);
 	std::vector<rw::math::Vector3D<> > stepColor(cv::Mat image);
-	std::vector<rw::math::Vector3D<> > stepSift(cv::Mat image, cv::Mat &obj);
 	cv::Mat getCvImage();
 
 private:
 	cv::Mat imgCv;
+	rw::math::Vector3D<> nearest(rw::math::Vector3D<> point, std::vector<rw::math::Vector3D<> > vect);
+	std::vector<rw::math::Vector3D<> > orderPoints(std::vector<rw::math::Vector3D<> > newPoints);
+	double dist(rw::math::Vector3D<> p1, rw::math::Vector3D<> p2);
 
 };
 
