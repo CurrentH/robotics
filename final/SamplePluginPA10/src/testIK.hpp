@@ -76,14 +76,17 @@ class testIK {
 		rw::math::Jacobian getS();
 		rw::math::Q calculateDq( rw::math::Jacobian, rw::math::Jacobian, rw::math::Jacobian, rw::math::Jacobian );
 
+
 		rw::math::Q bracketJointVelocity( rw::math::Q );
 		rw::math::Q getDeltaQ( rw::math::Jacobian );
 
+		double calculateMaxError( std::vector<rw::math::Jacobian>  );
 		rw::math::Jacobian transpose( rw::math::Jacobian );
 
 	//	Public attributes
 	public:
-
+		double _dT;
+		unsigned int numP = 1.0;
 
 	//	Private attributes
 	private:
@@ -109,11 +112,11 @@ class testIK {
 
 		std::vector<double> target{0,0,0,0,0,0};
 
-		double _dT;
+
 		double z = 0.5;
 		double f = 823;
 
-		unsigned int numP = 3;
+
 
 		std::vector<rw::math::Vector3D<> > logToolPos;
 		std::vector<rw::math::RPY<> > logToolRPY;

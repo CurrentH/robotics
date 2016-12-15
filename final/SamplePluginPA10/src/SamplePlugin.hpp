@@ -76,6 +76,9 @@ class SamplePlugin: public rws::RobWorkStudioPlugin, private Ui::Plugin
 
 	//	Private attributes
 	private:
+		bool runTest1 = true;
+		bool runTest2 = true;
+
 		QTimer* _timer;
 
 		rw::models::WorkCell::Ptr _wc;

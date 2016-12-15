@@ -39,7 +39,7 @@ void SamplePlugin::setupHandles(){
 }
 
 void SamplePlugin::setupIK(){
-	temp_ik = new testIK( 1 ); //todo: define global dT?
+	temp_ik = new testIK( 1.0 ); //todo: define global dT?
 	temp_ik->setCurrentState( _state );
 	temp_ik->setDevice( _wc );
 	temp_ik->setToolFrame( _wc );
@@ -167,14 +167,27 @@ void SamplePlugin::timer() {
 		_deviceRobot->setQ(temp_ik->step(), _state);
 		_rsHandle->setState(_state);
 		updateQTimage();
+		updateState();
 	}else if( temp_marker->sequenceDone() ){
 		_timer->stop();
 		_state = _defaultState;
 		temp_marker->resetIndex();
 		temp_ik->resetPose();
 		temp_ik->finishLog();
+
+		updateState();
+
+		if( temp_ik->_dT > 0.0 ){
+			temp_ik->_dT = temp_ik->_dT - 0.05;
+			_timer->start();
+		}else{
+			std::cout << "This test is done" << std::endl;
+			_timer->stop();
+		}
+
 	}
-	updateState();
+
+
 }
 
 void SamplePlugin::updateQTimage(){
@@ -205,7 +218,7 @@ void SamplePlugin::btnPressed() {
 	if(obj==_btnStart){
 		log().info() << "Start\n";
 		if(!_timer->isActive()){
-			_timer->start(500);
+			_timer->start(10);
 			log().info() << "\t - Timer on\n";
 		}
 	}
