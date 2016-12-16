@@ -37,7 +37,7 @@ void circleDetection(const cv::Mat &source, std::vector<cv::Vec3f> &circles){
 	cv::cvtColor(source, hsv, cv::COLOR_BGR2HSV);
 
 	// Extract circles from image
-	circles = getCircles(hsv, RED_LOW_MIN, RED_LOW_MAX) + getCircles(hsv, RED_HIGH_MIN, RED_HIGH_MAX) + getCircles(hsv, BLUE_MIN, BLUE_MAX);
+	circles = getCircles(hsv, RED_LOW_MIN, RED_LOW_MAX)/* + getCircles(hsv, RED_HIGH_MIN, RED_HIGH_MAX) + getCircles(hsv, BLUE_MIN, BLUE_MAX)*/;
 }
 
 Vision::Vision(){
@@ -82,7 +82,7 @@ std::vector<rw::math::Vector3D<> > Vision::getPoints(cv::Mat image){
 	std::vector<cv::Vec3f> circles;
 	circleDetection(imgCv, circles);
 	std::vector<rw::math::Vector3D<> > result;
-	for (int i = 0; i < circles.size(); i++){
+	for (int i = 0; i < circles.size() && i < 3; i++){
 		result.push_back(rw::math::Vector3D<>(circles[i][0], circles[i][1], circles[i][2]));
 		cv::Point center(std::round(circles[i][0]), std::round(circles[i][1]));
 		int radius = std::round(circles[i][2]);

@@ -250,54 +250,53 @@ void testIK::finishLog(){
 	std::cout << "Start logging" << std::endl;
 	std::ofstream posFile, rpyFile, jposFile, jrpyFile, jvelFile, errorFile;
 
-	std::string seq = "fast_" + std::to_string(numP) + "_";
-	std::string del = std::to_string(_dT);
+	std::string seq = "fast/" ;
+	std::string del =  std::to_string(numP) + "_" + std::to_string(_dT) + std::string(".csv");
 	std::string end = ".csv";
 
-	posFile.open( LOG_FILE_PATH + seq + std::string("pos_") + del + end );
+	posFile.open( LOG_FILE_PATH + seq + std::string("pos/") + del + end ,std::ios::out);
 	for( unsigned int i = 0; i < logToolPos.size(); i++ ){
 		for( unsigned int j = 0; j < 3; j++ ){
-			posFile << logToolPos[j] << ",";
+			posFile << logToolPos[i](j) << ",";
 		}
 		posFile << "\n";
 	}
 	posFile.close();
-	std::cout << "1";
+	std::cout << LOG_FILE_PATH + seq + std::string("pos/") + del + end << std::endl;
 
-	rpyFile.open( LOG_FILE_PATH + seq + std::string("rpy_") + del + end );
+	rpyFile.open( LOG_FILE_PATH + seq + std::string("rpy/") + del + end ,std::ios::out);
 	for( unsigned int i = 0; i < logToolRPY.size(); i++ ){
 		for( unsigned int j = 0; j < 3; j++ ){
-			rpyFile << logToolRPY[j] << ",";
+			rpyFile << logToolRPY[i](j) << ",";
 		}
 		rpyFile << "\n";
 	}
 	rpyFile.close();
-	std::cout << "2";
+	std::cout << LOG_FILE_PATH + seq + std::string("rpy/") + del + end << std::endl;
 
-	jposFile.open( LOG_FILE_PATH + seq + std::string("jpos_") + del + end );
+	jposFile.open( LOG_FILE_PATH + seq + std::string("jpos/") + del + end ,std::ios::out);
 	for( unsigned int i = 0; i < logJointPosition.size(); i++ ){
 		for( unsigned int j = 0; j < 7; j++ ){
 			jposFile << logJointPosition[i][j] << ",";
 		}
 		jposFile << "\n";
 	}
-	jposFile.close();
-	std::cout << "3";
+	jposFile.close();std::cout << LOG_FILE_PATH + seq + std::string("jpos/") + del + end << std::endl;
 
-	jvelFile.open( LOG_FILE_PATH + seq + std::string("jvel_") + del + end );
+	jvelFile.open( LOG_FILE_PATH + seq + std::string("jvel/") + del + end ,std::ios::out);
 	for( unsigned int i = 0; i < logJointVelocity.size(); i++ ){
 		for( unsigned int j = 0; j < 7; j++ ){
 			jvelFile << logJointVelocity[i][j] << ",";
 		}
 		jvelFile << "\n";
 	}
-	jvelFile.close();
-	std::cout << "4";
+	jvelFile.close();std::cout << LOG_FILE_PATH + seq + std::string("jvel/") + del + end << std::endl;
 
 	errorFile.open( LOG_FILE_PATH + seq + std::string("error") + end , std::ios_base::app);
 	errorFile << calculateMaxError(logTrackingError) << "\n";
 	errorFile.close();
-	std::cout << "5 - " << _dT << std::endl;;
+	std::cout << LOG_FILE_PATH + seq + std::string("error") + end << std::endl;
+	std::cout << _dT << std::endl;;
 
 	std::cout << "Logging done" << std::endl;
 }

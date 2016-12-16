@@ -86,11 +86,11 @@ class testIK {
 	//	Public attributes
 	public:
 		double _dT;
-		unsigned int numP = 1.0;
+		unsigned int numP = 3;
 
 	//	Private attributes
 	private:
-		bool useCV = true;
+		bool useCV = false;
 		bool initialRun = true;
 		bool doLogging = true;
 
@@ -115,7 +115,6 @@ class testIK {
 
 		double z = 0.5;
 		double f = 823;
-
 
 
 		std::vector<rw::math::Vector3D<> > logToolPos;
