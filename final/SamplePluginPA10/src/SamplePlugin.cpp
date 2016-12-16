@@ -39,7 +39,7 @@ void SamplePlugin::setupHandles(){
 }
 
 void SamplePlugin::setupIK(){
-	temp_ik = new testIK( 0.30 ); //todo: define global dT?
+	temp_ik = new testIK( 1.0 ); //todo: define global dT?
 	temp_ik->setCurrentState( _state );
 	temp_ik->setDevice( _wc );
 	temp_ik->setToolFrame( _wc );
