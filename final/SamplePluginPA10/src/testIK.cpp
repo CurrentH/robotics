@@ -12,10 +12,6 @@ testIK::testIK( double dT ) {
 
 	_dT = dT;
 
-	P0 = rw::math::Vector3D<>(0.0,		0.0,	0.0);
-	P1 = rw::math::Vector3D<>(0.1,		0.0,	0.0);
-	P2 = rw::math::Vector3D<>(0.0,		0.1,	0.0);
-
 	P0 = rw::math::Vector3D<>(0.15,		0.15,	0.0);
 	P1 = rw::math::Vector3D<>(-0.15,	0.15,	0.0);
 	P2 = rw::math::Vector3D<>(0.15,		-0.15,	0.0);
@@ -23,6 +19,10 @@ testIK::testIK( double dT ) {
 	P0 = rw::math::Vector3D<>(0.5,		0.5,	0.0);
 	P1 = rw::math::Vector3D<>(-0.5,		0.5,	0.0);
 	P2 = rw::math::Vector3D<>(0.5,		-0.5,	0.0);
+
+	P0 = rw::math::Vector3D<>(0.0,		0.0,	0.0);
+	P1 = rw::math::Vector3D<>(0.1,		0.0,	0.0);
+	P2 = rw::math::Vector3D<>(0.0,		0.1,	0.0);
 }
 
 testIK::~testIK() {
@@ -56,21 +56,20 @@ void testIK::setFrameGrabber( rwlibs::simulation::GLFrameGrabber *frameGrabber )
 void testIK::setTarget(){
 	rw::math::Jacobian uv(2*numP,1);
 	if( useCV ){
-		std::vector<rw::math::Vector3D<> > P = _vision->stepColor( getCameraView() );
-		for( unsigned int i = 0; i < numP; i++ ){
+		std::vector<rw::math::Vector3D<> > P = _vision->initColor( getCameraView() );
+
+		if( numP <= P.size() ){ finishLog(); }
+
+		for( unsigned int i = 0; i < numP && i < P.size(); i++ ){
 			uv(i*2,0) 	= P[i][0];
 			uv(i*2+1,0) = P[i][1];
 		}
 	}else{
 		uv = getUvPointsNoCV();
 	}
-
-	std::cout << "Target: " << std::endl;
 	for( unsigned int i = 0; i < 2*numP; i++ ){
 		target[i] = uv(i,0);
-		std::cout << target[i] << "\t";
 	}
-	std::cout << std::endl;
 }
 
 void testIK::resetPose(){
@@ -92,7 +91,8 @@ cv::Mat testIK::getCameraView(){
 }
 
 cv::Mat testIK::getCvView(){
-	return _vision->getCvImage();
+	if( useCV )	return _vision->getCvImage();
+	return getImageFrameGrabber();
 }
 
 cv::Mat testIK::toOpenCVImage(const Image& img) {
@@ -192,9 +192,7 @@ rw::math::Q testIK::calculateDq( rw::math::Jacobian _ji, rw::math::Jacobian _s, 
 
 
 rw::math::Q testIK::getDeltaQ( rw::math::Jacobian uv ){
-	std::cout << "uv:" << std::endl << uv << std::endl;
 	rw::math::Jacobian dudv = getDuDv( uv );
-	std::cout << "dudv:" << std::endl << dudv << std::endl;
 	rw::math::Jacobian J_image = getImageJacobian( uv );
 	rw::math::Jacobian S = getS();
 	rw::math::Jacobian J = getJ();
@@ -202,7 +200,7 @@ rw::math::Q testIK::getDeltaQ( rw::math::Jacobian uv ){
 
 	if( doLogging){ logTrackingError.push_back( dudv ); }
 
-	return _device->getQ(_state);
+	//return _device->getQ(_state);
 	return bracketJointVelocity( dq );
 }
 
@@ -239,27 +237,70 @@ rw::math::Jacobian testIK::transpose( rw::math::Jacobian J){
 	return JT;
 }
 
+double testIK::calculateMaxError( std::vector<rw::math::Jacobian> _eList ){
+	double dist;
+	double tdist;
+	for( unsigned int i = 0; i < _eList.size(); i++ ){
+		for (int j = 0; j < numP; j++) {
+			dist = sqrt( pow( _eList[i](i*2,0), 2 ) + pow( _eList[i](i*2+1,0), 2 ) );
+			tdist += abs(dist);
+		}
+	}
+	return tdist;
+}
+
 void testIK::finishLog(){
 	std::cout << "Start logging" << std::endl;
-	std::ofstream statFile;
-	statFile.open(LOG_FILE_PATH);
+	std::ofstream posFile, rpyFile, jposFile, jrpyFile, jvelFile, errorFile;
 
-	std::cout << logToolPos.size() << "\t";
-	std::cout << logToolRPY.size() << "\t";
-	std::cout << logJointPosition.size() << "\t";
-	std::cout << logJointVelocity.size() << "\t";
-	std::cout << logTrackingError.size() << std::endl;
-	std::cout << logTrackingError[1].size1() << " " << logTrackingError[1].size2() << std::endl;
+	std::string seq = "slow/" ;
+	std::string del =  std::to_string(numP) + "_" + std::to_string(_dT) + std::string(".csv");
+	std::string end = ".csv";
 
-	for( unsigned int i = 0; i < logJointPosition.size(); i++ ){
-			statFile << logToolPos[i] << ",";
-			statFile << logToolRPY[i] << ",";
-			statFile << logJointPosition[i] << ",";
-			statFile << logJointVelocity[i] << ",";
-			statFile << logTrackingError[i] << ",";
+	posFile.open( LOG_FILE_PATH + seq + std::string("pos/") + del + end ,std::ios::out);
+	for( unsigned int i = 0; i < logToolPos.size(); i++ ){
+		for( unsigned int j = 0; j < 3; j++ ){
+			posFile << logToolPos[i](j) << ",";
+		}
+		posFile << "\n";
 	}
+	posFile.close();
+	std::cout << LOG_FILE_PATH + seq + std::string("pos/") + del + end << std::endl;
 
-	statFile.close();
+	rpyFile.open( LOG_FILE_PATH + seq + std::string("rpy/") + del + end ,std::ios::out);
+	for( unsigned int i = 0; i < logToolRPY.size(); i++ ){
+		for( unsigned int j = 0; j < 3; j++ ){
+			rpyFile << logToolRPY[i](j) << ",";
+		}
+		rpyFile << "\n";
+	}
+	rpyFile.close();
+	std::cout << LOG_FILE_PATH + seq + std::string("rpy/") + del + end << std::endl;
+
+	jposFile.open( LOG_FILE_PATH + seq + std::string("jpos/") + del + end ,std::ios::out);
+	for( unsigned int i = 0; i < logJointPosition.size(); i++ ){
+		for( unsigned int j = 0; j < 7; j++ ){
+			jposFile << logJointPosition[i][j] << ",";
+		}
+		jposFile << "\n";
+	}
+	jposFile.close();std::cout << LOG_FILE_PATH + seq + std::string("jpos/") + del + end << std::endl;
+
+	jvelFile.open( LOG_FILE_PATH + seq + std::string("jvel/") + del + end ,std::ios::out);
+	for( unsigned int i = 0; i < logJointVelocity.size(); i++ ){
+		for( unsigned int j = 0; j < 7; j++ ){
+			jvelFile << logJointVelocity[i][j] << ",";
+		}
+		jvelFile << "\n";
+	}
+	jvelFile.close();std::cout << LOG_FILE_PATH + seq + std::string("jvel/") + del + end << std::endl;
+
+	errorFile.open( LOG_FILE_PATH + seq + std::string("error") + end , std::ios_base::app);
+	errorFile << calculateMaxError(logTrackingError) << "\n";
+	errorFile.close();
+	std::cout << LOG_FILE_PATH + seq + std::string("error") + end << std::endl;
+	std::cout << _dT << std::endl;;
+
 	std::cout << "Logging done" << std::endl;
 }
 

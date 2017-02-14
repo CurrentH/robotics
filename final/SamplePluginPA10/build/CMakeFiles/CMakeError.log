@@ -1,20 +1,20 @@
 Determining if the Q_WS_WIN exist failed with the following output:
 Change Dir: /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_244be/fast"
-/usr/bin/make -f CMakeFiles/cmTC_244be.dir/build.make CMakeFiles/cmTC_244be.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c7d24/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c7d24.dir/build.make CMakeFiles/cmTC_c7d24.dir/build
 make[1]: Entering directory '/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_244be.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++    -I/usr/include/qt4   -o CMakeFiles/cmTC_244be.dir/CheckSymbolExists.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Building CXX object CMakeFiles/cmTC_c7d24.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -I/usr/include/qt4   -o CMakeFiles/cmTC_c7d24.dir/CheckSymbolExists.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
 /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
 /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
    return ((int*)(&Q_WS_WIN))[argc];
                    ^
-CMakeFiles/cmTC_244be.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_244be.dir/CheckSymbolExists.cxx.o' failed
-make[1]: *** [CMakeFiles/cmTC_244be.dir/CheckSymbolExists.cxx.o] Error 1
+CMakeFiles/cmTC_c7d24.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_c7d24.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_c7d24.dir/CheckSymbolExists.cxx.o] Error 1
 make[1]: Leaving directory '/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_244be/fast' failed
-make: *** [cmTC_244be/fast] Error 2
+Makefile:126: recipe for target 'cmTC_c7d24/fast' failed
+make: *** [cmTC_c7d24/fast] Error 2
 
 File /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
 /* */
@@ -34,20 +34,20 @@ int main(int argc, char** argv)
 Determining if the Q_WS_QWS exist failed with the following output:
 Change Dir: /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_40dce/fast"
-/usr/bin/make -f CMakeFiles/cmTC_40dce.dir/build.make CMakeFiles/cmTC_40dce.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_59cb6/fast"
+/usr/bin/make -f CMakeFiles/cmTC_59cb6.dir/build.make CMakeFiles/cmTC_59cb6.dir/build
 make[1]: Entering directory '/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_40dce.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++    -I/usr/include/qt4   -o CMakeFiles/cmTC_40dce.dir/CheckSymbolExists.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Building CXX object CMakeFiles/cmTC_59cb6.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -I/usr/include/qt4   -o CMakeFiles/cmTC_59cb6.dir/CheckSymbolExists.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
 /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
 /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
    return ((int*)(&Q_WS_QWS))[argc];
                    ^
-CMakeFiles/cmTC_40dce.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_40dce.dir/CheckSymbolExists.cxx.o' failed
-make[1]: *** [CMakeFiles/cmTC_40dce.dir/CheckSymbolExists.cxx.o] Error 1
+CMakeFiles/cmTC_59cb6.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_59cb6.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_59cb6.dir/CheckSymbolExists.cxx.o] Error 1
 make[1]: Leaving directory '/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_40dce/fast' failed
-make: *** [cmTC_40dce/fast] Error 2
+Makefile:126: recipe for target 'cmTC_59cb6/fast' failed
+make: *** [cmTC_59cb6/fast] Error 2
 
 File /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
 /* */
@@ -67,20 +67,20 @@ int main(int argc, char** argv)
 Determining if the Q_WS_MAC exist failed with the following output:
 Change Dir: /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_7630e/fast"
-/usr/bin/make -f CMakeFiles/cmTC_7630e.dir/build.make CMakeFiles/cmTC_7630e.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_860b0/fast"
+/usr/bin/make -f CMakeFiles/cmTC_860b0.dir/build.make CMakeFiles/cmTC_860b0.dir/build
 make[1]: Entering directory '/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_7630e.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++    -I/usr/include/qt4   -o CMakeFiles/cmTC_7630e.dir/CheckSymbolExists.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Building CXX object CMakeFiles/cmTC_860b0.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -I/usr/include/qt4   -o CMakeFiles/cmTC_860b0.dir/CheckSymbolExists.cxx.o -c /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
 /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
 /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
    return ((int*)(&Q_WS_MAC))[argc];
                    ^
-CMakeFiles/cmTC_7630e.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_7630e.dir/CheckSymbolExists.cxx.o' failed
-make[1]: *** [CMakeFiles/cmTC_7630e.dir/CheckSymbolExists.cxx.o] Error 1
+CMakeFiles/cmTC_860b0.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_860b0.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_860b0.dir/CheckSymbolExists.cxx.o] Error 1
 make[1]: Leaving directory '/home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_7630e/fast' failed
-make: *** [cmTC_7630e/fast] Error 2
+Makefile:126: recipe for target 'cmTC_860b0/fast' failed
+make: *** [cmTC_860b0/fast] Error 2
 
 File /home/theis/workspace/robotics/final/SamplePluginPA10/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
 /* */

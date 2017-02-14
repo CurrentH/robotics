@@ -39,7 +39,7 @@ void SamplePlugin::setupHandles(){
 }
 
 void SamplePlugin::setupIK(){
-	temp_ik = new testIK( 1 ); //todo: define global dT?
+	temp_ik = new testIK( 1.0 ); //todo: define global dT?
 	temp_ik->setCurrentState( _state );
 	temp_ik->setDevice( _wc );
 	temp_ik->setToolFrame( _wc );
@@ -87,9 +87,10 @@ void SamplePlugin::initialize() {
 void SamplePlugin::open(WorkCell* workcell)
 {
 	log().info() << "OPEN: " << workcell->getFilename() << "\n";
-
 	if (_wc != NULL) {
 		// Add the texture render to this workcell if there is a frame for texture
+
+
 		Frame* textureFrame = _wc->findFrame("MarkerTexture");
 		if (textureFrame != NULL) {
 			_rsHandle->getWorkCellScene()->addRender("TextureImage",_textureRender,textureFrame);
@@ -115,12 +116,12 @@ void SamplePlugin::open(WorkCell* workcell)
 				_framegrabber = new GLFrameGrabber(width,height,fovy);
 				SceneViewer::Ptr gldrawer = _rsHandle->getView()->getSceneViewer();
 				_framegrabber->init(gldrawer);
-
 				temp_ik->setFrameGrabber( _framegrabber );
 				temp_ik->setTarget();
 			}
 		}
 	}
+
 }
 
 void SamplePlugin::close() {
@@ -166,14 +167,27 @@ void SamplePlugin::timer() {
 		_deviceRobot->setQ(temp_ik->step(), _state);
 		_rsHandle->setState(_state);
 		updateQTimage();
+		updateState();
 	}else if( temp_marker->sequenceDone() ){
 		_timer->stop();
 		_state = _defaultState;
 		temp_marker->resetIndex();
 		temp_ik->resetPose();
 		temp_ik->finishLog();
+
+		updateState();
+
+		if( temp_ik->_dT > 0.0 ){
+			temp_ik->_dT = temp_ik->_dT - 0.05;
+			_timer->start();
+		}else{
+			std::cout << "This test is done" << std::endl;
+			_timer->stop();
+		}
+
 	}
-	updateState();
+
+
 }
 
 void SamplePlugin::updateQTimage(){
@@ -204,7 +218,7 @@ void SamplePlugin::btnPressed() {
 	if(obj==_btnStart){
 		log().info() << "Start\n";
 		if(!_timer->isActive()){
-			_timer->start(500);
+			_timer->start(10);
 			log().info() << "\t - Timer on\n";
 		}
 	}

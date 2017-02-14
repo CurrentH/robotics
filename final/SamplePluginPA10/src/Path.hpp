@@ -4,4 +4,4 @@
 #define MARKER_PATH PATH + std::string("markers/")
 #define SEQUENCE_PATH PATH + std::string("motions/")
 #define BACKGROUND_COLOR_PATH PATH + std::string("backgrounds/")
-#define LOG_FILE_PATH PATH + std::string("test_log.csv")
+#define LOG_FILE_PATH PATH + std::string("/log/")
