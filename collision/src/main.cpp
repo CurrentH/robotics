@@ -14,19 +14,26 @@ using namespace rwlibs::proximitystrategies;
 
 float epsilon = 0.1;
 
+bool collisionCheck( State state, Device::Ptr device, CollisionDetector::Ptr CD, rw::math::Q q_i)
+{
+	//	Check collision
+	device->setQ(q_i, state);
+	CollisionDetector::QueryResult data;
+	return CD->inCollision(state, &data);
+}
+
 bool alg1( State state, Device::Ptr device, CollisionDetector::Ptr CD, rw::math::Q q_init, rw::math::Q q_goal )
 {
 	float deltaQ = rw::math::Distance(q_init, q_goal);
-	int n = ( rw::math::Math::abs(deltaQ) / epsilon ) - 1;
+	int n = ( rw::math::abs(deltaQ) / epsilon ) - 1;
 
 	for (int i = 1; i<n; i++ )
 	{
-		rw::math::Q q_i = i * epsilon * deltaQ/(rw::Math::abs(deltaQ)) + q_init;
+		rw::math::Q q_i = i * epsilon * deltaQ/(rw::math::abs(deltaQ)) + q_init;
 
 		//	Check collision
-		device->setQ(q_i, state);
-		CollisionDetector::QueryResult data;
-		if( CD->inCollision(state,&data) ){
+		if( collisionCheck(state, device, CD, q_i) )
+		{
 			return false;
 		}
 	}
@@ -44,9 +51,8 @@ bool alg2( State state, Device::Ptr device, CollisionDetector::Ptr CD, rw::math:
 		rw::math::Q q_i = i * step + q_init;
 
 		//	Check collision
-		device->setQ(q_i, state);
-		CollisionDetector::QueryResult data;
-		if( CD->inCollision(state,&data) ){
+		if( collisionCheck(state, device, CD, q_i) )
+		{
 			return false;
 		}
 	}
@@ -69,9 +75,8 @@ bool alg3( State state, Device::Ptr device, CollisionDetector::Ptr CD, rw::math:
 			rw::math::Q q_i = q_init + ( j-0.5 ) * step;
 			
 			//	Check collision
-			device->setQ(q_i, state);
-			CollisionDetector::QueryResult data;
-			if( CD->inCollision(state,&data) ){
+			if( collisionCheck(state, device, CD, q_i) )
+			{
 				return false;
 			}
 		}
@@ -97,11 +102,9 @@ bool alg4( State state, Device::Ptr device, CollisionDetector::Ptr CD, rw::math:
 			rw::math::Q q_i = q_init + ( j-0.5 ) * step;
 			if( rw::math::Distance( q_i, q_init ) < rw::math::Math::abs(deltaQ) )
 			{
-			
 				//	Check collision
-				device->setQ(q_i, state);
-				CollisionDetector::QueryResult data;
-				if( CD->inCollision(state,&data) ){
+				if( collisionCheck(state, device, CD, q_i) )
+				{
 					return false;
 				}
 			}
